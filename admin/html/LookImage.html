@@ -46,11 +46,17 @@
 		var LookImage = function(){
 			var result = {};
 				var ShowImage = function(){
+					alert(111);
 					var name=UrlParm.parm("name");
+					var phpid=UrlParm.parm("phpid");
 					$.ajax({
-						type: "get",
-						url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "studentImage/image/" + name,
+						type: "post",
+						url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "studentImage/image/",
 						//dataType:'json',
+						data : {
+							"time" : name,
+							"phpid" : phpid
+						},
 						async:false,
 						success: function(d) {
 							var obj = eval(d);
@@ -105,14 +111,13 @@
 		$('.manual-open-group').change(function(e) {
 			var v = $(this).val();
 			var images = [
-//				'images/gallery/large/apocalypse.jpg',
 			];
 			var settings = {};
 			$.fn.galpop('openBox',settings,images,v);
 		});
 		
 		$("#back").click(function() {
-			document.location = "ImageFile.html";
+			window.history.back();
 		});
 	});
 </script>

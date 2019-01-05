@@ -129,19 +129,9 @@
             </div>
         <!--</form>-->
     </div>
-<script>
-	function ArrowLeft(){
-		div1.style.display="flex";
-		div2.style.display="none";
-		}
-	function ArrowRight(){
-		div2.style.display="flex";
-		div1.style.display="none";
-		}
-</script>
-
 <script src="../js/jquery/jQuery.js"></script>
 <script src="../config/config.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/new_file.js" type="text/javascript" charset="utf-8"></script>
 
 <script>
     $(function(){
@@ -149,6 +139,7 @@
     		var result = {};
     		
     		function addtest(){
+    			var phpid = UrlParm.parm("phpid");
     			$.ajax({
 		    		type:"POST",
 		    		url:'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "AddQuestion/addquestion/"+"&"+"t="+Math.random(),
@@ -157,7 +148,8 @@
 		    			"ok": "ok",
 		    			"q_No": $("#q_No").val(),
 		    			"q_content": $(".q_content").val(),
-		    			"q_board": $("#q_board").val()
+		    			"board": $("#q_board").val(),
+		    			"phpid" : phpid
 		    		},
 		    		success: function(data) {
 		    			alert("添加成功！");

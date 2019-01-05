@@ -51,11 +51,18 @@
 			function showQuest(){
     			var result = {};
     			var name=UrlParm.parm("name");
+    			var phpid = UrlParm.parm("phpid");
+    			console.log(name);
+    			console.log(phpid);
 		    	$.ajax({
 		    		type:"post",
-		    		url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "LookQuestion/lookquestion/" + name,
+		    		url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "LookQuestion/lookquestion/" ,
 		    		async:true,
 		    		dataType:'json',
+		    		data:{
+		    			"phpid" : phpid,
+		    			"q_id" : name
+		    		},
 		    		success: function(d) {
 		    			var obj = eval(d);
 						$(".textarea_custom").val(obj.data[0].q_content);

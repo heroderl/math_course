@@ -45,9 +45,9 @@
 		<div id="side">
 			<div id="left_menu">
 				<ul id="TabPage2" style="height:200px; margin-top:50px;">
-					<li id="left_tab1" onClick="javascript:switchTab('TabPage2','left_tab1');" title="数模块">
+					<!--<li id="left_tab1" onClick="javascript:switchTab('TabPage2','left_tab1');" title="数模块">
 						<img alt="地理模块" title="地理模块" src="../images/common/1_hover.png" width="33" height="31">
-					</li>
+					</li>-->
 					<li id="left_tab2" class="selected" onClick="javascript:switchTab('TabPage2','left_tab2', 'none');" data-selected="none" title="数学模块">
 						<img alt="数学模块" title="数学模块" src="../images/common/2.png" width="33" height="31">
 					</li>
@@ -91,7 +91,6 @@
 			/**退出系统**/
 			function logout() {
 				//var skey = getCookie("username");
-				//alert(skey);
 				if(confirm("您确定要退出本系统吗？")) {
 					window.location.href = "../logout.php";
 				}
@@ -277,6 +276,15 @@
 			});
 
 			function loadMenu(resourceType, treeObj) {
+				var names = document.cookie;
+				namess = names.split(" ");
+				var reg = new RegExp("([0-9a-z]+).*?");
+				var name = reg.exec(namess[0]);
+				var cookie = name[0];
+				
+				
+
+
 				//			$.ajax({
 				//				type:"POST",
 				//				url:"${dynamicURL}/authority/modelPart.action?resourceType=" + resourceType,
@@ -310,7 +318,7 @@
 						"resourceType": ""
 					},
 					{
-						"accessPath": "showAllTestQuestion.html",
+						"accessPath": "showAllTestQuestion.html?phpid=" + cookie,
 						"checked": false,
 						"delFlag": 0,
 						"parentID": 3,
@@ -323,7 +331,7 @@
 						"resourceType": ""
 					},
 					{
-						"accessPath": "addTestQuest.html",
+						"accessPath": "addTestQuest.html?phpid=" + cookie,
 						"checked": false,
 						"delFlag": 0,
 						"parentID": 3,
@@ -336,7 +344,7 @@
 						"resourceType": ""
 					},
 					{
-						"accessPath": "ImageFile.html",
+						"accessPath": "ImageFile.html?phpid=" + cookie,
 						"checked": false,
 						"delFlag": 0,
 						"parentID": 3,

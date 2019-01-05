@@ -63,13 +63,24 @@
 			var ListNum = 0 ; //用于获得数据行数
 			var TotalNum ;
 			
+//				console.log(name)
+			
 			function FirstPage() {
 				var result = {};
 				var that = this;
+				
+				//获取登陆后的cookie值
+				var phpid=UrlParm.parm("phpid");	
+				
 				$.ajax({
-					type: "get",
-					url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "ShowQuestion/showquestion/10/1"+"&"+"t="+Math.random(),
+					type: "post",
+					url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "ShowQuestion/showquestion/"+"&"+"t="+Math.random(),
 					dataType:'json',
+					data:{
+						"num" : "10",
+						"number" : "1",
+						"phpid" : phpid			//post方法将cookie值引入接口
+					},
 					async:false,//改异步显示数据
 					success: function(d) {
 						var obj = eval(d);
@@ -79,7 +90,7 @@
 							var tdNode2 = $('<td height="21" bgcolor="#FFFFFF"><div align="center" class="number">' + obj['data'][i].q_content + '</div></td>');
 							var tdNode3 = $('<td height="21" bgcolor="#FFFFFF"><div align="center" class="number">' + obj['data'][i].q_time + '</div></td>');
 							var tdNode4 = $('<td height="21" bgcolor="#FFFFFF"><div align="center" class="number">' + obj['data'][i].q_state + '</div></td>');
-							var tdNode5 = $('<td height="21" bgcolor="#FFFFFF"><div align="center" class="number"><a style="text-decoration:none" href="lookTestQuest.html?name=' + obj['data'][i].q_id + '">查看&nbsp;</a><a style="text-decoration:none" href="UpdateQuestion.html?name=' + obj['data'][i].q_id + '">修改&nbsp;</a><a style="text-decoration:none" class="delete">删除</a></div></td>');
+							var tdNode5 = $('<td height="21" bgcolor="#FFFFFF"><div align="center" class="number"><a style="text-decoration:none" href="lookTestQuest.html?name=' + obj['data'][i].q_id + '&phpid=' + phpid + '">查看&nbsp;</a><a style="text-decoration:none" href="UpdateQuestion.html?name=' + obj['data'][i].q_id + '&phpid=' + phpid + '">修改&nbsp;</a><a style="text-decoration:none" class="delete">删除</a></div></td>');
 							var trNode = $('<tr></tr>');
 							trNode.append(tdNode1, tdNode2, tdNode3, tdNode4, tdNode5);
 							$('table#table>tbody').append( trNode );
@@ -92,6 +103,7 @@
 					},
 					error: function(d) {
 //						alert("读取失败");
+						
 					}
 				});
 				
@@ -103,7 +115,8 @@
 				
 				var result = {};
 				var that = this;
-				
+				var name=UrlParm.parm("name");
+				var phpid=UrlParm.parm("phpid");
 				if (this.page > Math.ceil(this.TotalNum/10)) {
 					this.page = Math.ceil(this.TotalNum/10);
 					return;
@@ -113,9 +126,14 @@
 				} else {
 					$("tbody").find("tr").remove();
 					$.ajax({
-						type: "get",
-						url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "ShowQuestion/showquestion/10/" + page +"&"+"t="+Math.random(),
+						type: "post",
+						url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "ShowQuestion/showquestion/10/" + "&"+"t="+Math.random(),
 						dataType:'json',
+						data:{
+							"num" : "10",
+							"number" : page,
+							"phpid" : phpid
+						},
 					    async:false,//改异步显示数据
 						success: function(d) {
 							var obj = eval(d);
@@ -126,7 +144,7 @@
 								var tdNode2 = $('<td height="21" bgcolor="#FFFFFF"><div align="center" class="number">' + obj['data'][i].q_content + '</div></td>');
 								var tdNode3 = $('<td height="21" bgcolor="#FFFFFF"><div align="center" class="number">' + obj['data'][i].q_time + '</div></td>');
 								var tdNode4 = $('<td height="21" bgcolor="#FFFFFF"><div align="center" class="number">' + obj['data'][i].q_state + '</div></td>');
-								var tdNode5 = $('<td height="21" bgcolor="#FFFFFF"><div align="center" class="number"><a style="text-decoration:none" href="lookTestQuest.html?name=' + obj['data'][i].q_id + '">查看&nbsp;</a><a style="text-decoration:none" href="UpdateQuestion.html?name=' + obj['data'][i].q_id + '">修改&nbsp;</a><a style="text-decoration:none"  class="delete">删除</a></div></td>');
+								var tdNode5 = $('<td height="21" bgcolor="#FFFFFF"><div align="center" class="number"><a style="text-decoration:none" href="lookTestQuest.html?name=' + obj['data'][i].q_id + '&phpid=' + phpid + '">查看&nbsp;</a><a style="text-decoration:none" href="UpdateQuestion.html?name=' + obj['data'][i].q_id + '&phpid=' + phpid + '">修改&nbsp;</a><a style="text-decoration:none" class="delete">删除</a></div></td>');
 								var trNode = $('<tr></tr>');
 								trNode.append(tdNode1, tdNode2, tdNode3, tdNode4, tdNode5);
 								$('table#table>tbody').append( trNode );
@@ -150,19 +168,21 @@
 			
 			function deletee(thiss){
 				var result = {};
+				var phpid=UrlParm.parm("phpid");
 				var i = thiss.target.parentNode.parentNode.parentNode.firstChild.getAttribute('data-qid');
 				$.ajax({
-					type: "get",
+					type: "post",
 					url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "ShowQuestion/deletequestion/" + i ,
 					dataType:'json',
+					data:{
+						"phpid" : phpid
+					},	
 					async:false,//改异步显示数据
 					success: function(d) {
-						console.log("删除成功");
 						alert("删除成功");
 					},
 					error : function(d) {
 						alert("删除失败");
-						console.log("删除失败");
 					}
 				});
 				
@@ -175,11 +195,16 @@
 				
 				var that = this;
 				
+				var phpid=UrlParm.parm("phpid");
+				
 				$.ajax({
-					type: "get",
+					type: "post",
 					url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "ShowQuestion/sumnum" ,
 					dataType:'json',
 					async:false,//改异步显示数据
+					data:{
+						"phpid" : phpid
+					},
 					success: function(d) {
 						var obj = eval(d);
 						that.TotalNum = parseInt(obj.data[0].count);

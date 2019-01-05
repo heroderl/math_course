@@ -114,19 +114,13 @@
                     </tr>
                     
                     <tr>
-                        <td>試題解析<br/></td>
-                        <td>
-                            <textarea name="q_other" style="margin-left:10px; resize: none" maxlength="256" class="textarea_custom" ></textarea></td>
+                        <td colspan="2">
+                            <div class="Button_submit">
+                            	<input type="button" id="reset" class="ui_input_btn03" value="重置">
+                            	<input type="submit" id="update" class="ui_input_btn03" name="ok"   value="修改">
+                            </div>
+                        </td>
                     </tr>
-                    
-                        <tr>
-                            <td colspan="2">
-                                <div class="Button_submit">
-                                	<input type="button" id="reset" class="ui_input_btn03" value="重置">
-                                	<input type="submit" id="update" class="ui_input_btn03" name="ok"   value="修改">
-                                </div>
-                            </td>
-                        </tr>
                 </table>
             </div>
     </div>
@@ -148,11 +142,18 @@
     		
 			function showQuestion() {
 				var name=UrlParm.parm("name");
+				var phpid=UrlParm.parm("phpid");
+				console.log(name);
+				console.log(phpid);
 		    	$.ajax({
 		    		type:"post",
-		    		url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "LookQuestion/lookquestion/" + name,
+		    		url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "LookQuestion/lookquestion/",
 		    		async:true,
 		    		dataType:'json',
+		    		data:{
+						"q_id" : name,
+						"phpid" : phpid			//post方法将cookie值引入接口
+					},
 		    		success: function(d) {
 		    			var obj = eval(d);
 						$("#QuestionNo").val(obj.data[0].q_No);
@@ -167,23 +168,24 @@
 			
 			function change() {
 				var myDate = new Date();
-				var name = UrlParm.parm("name");
-				 jQuery.support.cors = true;
+				var name=UrlParm.parm("name");
+				var phpid=UrlParm.parm("phpid");
+				console.log(name);
+				console.log(phpid);
+				jQuery.support.cors = true;
 				$.ajax({
 					type:"post",
-					url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "UpdateQuestion/updatequestion/" + name,
+					url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "UpdateQuestion/updatequestion/",
 					async:true,
 					dataType:'json',
 					data:{ 
+						"q_id" : name,
+						"phpid" : phpid	,
 						'q_content':$(".q_content").val(),
 						'q_board' : $("#q_board").val()
 					},
 					success: function(data) {
 						alert("修改成功！");
-						document.location='http://' + urlConfig.host + ':' + urlConfig.post +'/math_course/admin/html/showAllTestQuestion.html';
-//						location.reload('http://localhost/math_course/admin/showAllTestQuestion.html');
-//						window.history.go(-1);
-//						location.reload();
 						
 					},
 					error: function(xml, status, error) {

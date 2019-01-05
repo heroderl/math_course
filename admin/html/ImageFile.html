@@ -18,16 +18,21 @@
 <script src="../js/jquery/jquery-1.7.1.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/lazyLoad/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../config/config.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/new_file.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 	$(function(){
+		var phpid = UrlParm.parm("phpid");
 		var ImageFile = function(){
 			var result = {};
 				var ShowFile = function(){
 					$.ajax({
-						type: "get",
+						type: "post",
 						url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "studentImage/timefile",
-						dataType:'json',
-						async:true,
+						dataType : 'json',
+						async : true,
+						data : {
+							"phpid" : phpid
+						},
 						success: function(d) {
 							var obj = eval(d);
 							for(var i = 0 ; i < obj.length; i++)
@@ -37,7 +42,7 @@
 							}
 						},
 						error: function(d) {
-							//alert("读取失败");
+							alert("读取失败");
 						},
 					});
 				}
@@ -49,7 +54,7 @@
 		imagefile.ShowFile();
 		
 		$('.container').on('click', '#FileDate', function() {
-			document.location='http://' + urlConfig.host + ':' + urlConfig.post +'/math_course/admin/html/LookImage.html?name=' + this.childNodes[1].innerHTML;
+			document.location='http://' + urlConfig.host + ':' + urlConfig.post +'/math_course/admin/html/LookImage.html?name=' + this.childNodes[1].innerHTML + '&phpid=' + phpid;
 		});
 	});
 </script>
