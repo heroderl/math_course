@@ -33,7 +33,7 @@
                     <div class="toolScroll">
                         <div class="toolContent">
                             <div class="tools_button">
-                                <button id="interface_show">?</button>
+                                <button id="interface_show" @click="isShowMask()">?</button>
                                 <ul>
                                     <li><button id="point" class="nochoosed">點</button></li>
                                     <li><button id="segment" class="nochoosed">綫段</button></li>
@@ -50,17 +50,21 @@
                         </div>
                     </div>
                 </article>
-                <article class="inforPanel">
+                <article class="inforPanel" v-show="infoFlag">
                     <div class="inforMask">
                         <h1>操作提示</h1>
                         <ul>
                             <li>點：點擊“點”功能按鈕，可繪製一個點；</li>
                             <li>綫段：點擊“綫段”功能按鈕，在畫板拖動形成綫段；</li>
-                            <li>扇形：選中一個圓后，點擊“扇形”功能按鈕，在圓上拖動形成扇形；</li>
                             <li>圓：點擊“圓”功能按鈕，點擊畫板拖動形成圓；</li>
-                            <li></li>
+                            <li>扇形：選中一個圓后，點擊“扇形”功能按鈕，在圓上拖動形成扇形；</li>
+                            <li>半徑：選中一個圓后，在圓上點擊形成半徑；</li>
+                            <li>直徑：選中一個圓后，在圓上點擊形成直徑；</li>
+                            <li>弦：選中一個扇形后，在圖形上點擊形成弦；</li>
+                            <li>文本框：在繪製圖形后，輸入角度/厘米改變圖形的大小；</li>
+                            <li>保存：點擊“保存”功能按鈕，畫板内容保存至本地，並上傳至教師端。</li>
                         </ul>
-                        <button>跳过</button>
+                        <button @click="isShowMask()">跳过</button>
                     </div>
                 </article>
             </div>

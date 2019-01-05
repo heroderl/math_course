@@ -217,17 +217,17 @@ article.inforPanel {
     background-color: dimgray;
     border-radius: 20px;
     color: white;
-    padding: 25px 15px;
+    padding: 15px 10px;
     display: inline-block;
     position: absolute;
     top: 0;
     left: 0;
 }
 .inforMask>h1 {
-    font-size: 32px;
-    height: 32px;
-    line-height: 32px;
-    margin-bottom: 18px;
+    font-size: 25px;
+    height: 25px;
+    line-height: 25px;
+    margin-bottom: 15px;
 }
 .inforMask>ul {
     font-size: 20px;
@@ -248,6 +248,6 @@ article.inforPanel {
     background-image: url(../../../static/image/tubiao.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    margin-top: 18px;
+    margin-top: 15px;
     line-height: 52.5px;
 }
