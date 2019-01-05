@@ -54,7 +54,7 @@ class ShowQuestion{
 			$num1=$_POST["num"];
 			$num2=$_POST["number"]-1;
 			$num3=$num1*$num2;
-			$sql="select * from question limit $num3,$num1";
+			$sql="select * from question order by q_time desc limit $num3,$num1";
 			$result=$this->conn->selectBySql($sql);
 			header("Access-Control-Allow-Origin: *"); // 允许任意域名发起的跨域请求
 			//if(isset($_COOKIE['username']))//
