@@ -1,0 +1,14 @@
+作用： 查看试题的画板
+url:       math_course/admin/KeepPhoto.php
+方法名: lookboard()
+参数：
+           $_POST["q_id"] :试题id
+返回值:json格式的指定试题id数据
+
+
+作用： 用画板数据保存成本地图片
+url:       math_course/admin/KeepPhoto.php
+方法名: base64_image_content()
+参数：
+           $_POST["board"] :画板的数据q_board
+返回值:本地图片
