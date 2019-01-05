@@ -18,21 +18,23 @@ class UpdateQuestion{
         $this->conn = new Connection();
     }
 	
-	
-	//$param数组参数为$q_id:试卷id
-	//$param[0]:试卷id
-	public function updatequestion($param){
-		if(isset($_COOKIE['username']))//if($_COOKIE['PHPSESSID']==$phpsessid)
+	//接口参数
+	//$_POST["q_id"]:试卷id
+	public function updatequestion(){
+		//$_POST['phpid']前端发送过来的phpsessid
+		$phpsessid=$_POST['phpid'];//获取前端发送过来的phpsessid
+//		if(isset($_COOKIE['username']))
+		if($_COOKIE['PHPSESSID']==$phpsessid)
 		{
 			if($_SESSION["overtime"]>time())
 			{
-				$q_id=$param[0];
+				$q_id=$_POST["q_id"];
 				$q_content=$_POST['q_content'];
 				$q_board=$_POST['q_board'];
 				
 				//echo $q_id;
 				//测试
-				//$q_id=$param[0];
+				//$q_id=$_POST["q_id"];
 				//$q_content="1411";
 				//$q_board="456416546";
 		

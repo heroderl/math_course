@@ -4,7 +4,7 @@
  * User: dengjunle
  * Date: 2018/12/2
  * Time: 16:59
- * Function:前台查看数据
+ * Function:前端查看数据
  */
 require_once(realpath(dirname(__FILE__) . "/../") . "/common/connection.php");
 error_reporting(0);
@@ -48,10 +48,9 @@ class FindQuestion{
 	 
  
 	 //推送试题choose
-	 //$param数组参数为$q_id:试卷id
-	 //$param[0]:试卷id
-	 public function choose($param){
-		$q_id=$param[0];
+	 //$_POST["q_id"];试卷id
+	 public function choose(){
+		$q_id=$_POST["q_id"];
 		$q_state=$_POST["q_state"];
 		if($_POST["q_state"]=="推送中")
 		{
@@ -67,10 +66,9 @@ class FindQuestion{
 	 
 	 
 	 //查看试题的画板
-	 //$param数组参数为$q_id:试卷id
-	 //$param[0]:试卷id
-	public function lookboard($param){
-			$q_id=$param[0];
+	 //$_POST["q_id"];试卷id
+	public function lookboard(){
+			$q_id=$_POST["q_id"];
 			$sql="select * from question where q_id='$q_id'";
 			$result=$this->conn->selectBySql($sql);
 			header("Access-Control-Allow-Origin: *"); // 允许任意域名发起的跨域请求  

@@ -18,17 +18,18 @@ class LookQuestion{
         $this->conn = new Connection();
     }
 	
-	//$param数组参数为$q_id:试卷id
-	//$param[0]:试卷id
-	public function lookquestion($param){
+	//接口参数
+	//$_POST["q_id"]//试卷id
+	public function lookquestion(){
 		
 		//$_POST['phpid']前端发送过来的phpsessid
-		//$phpsessid=$_POST['phpid'];//获取前端发送过来的phpsessid
-		if(isset($_COOKIE['username']))//if($_COOKIE['PHPSESSID']==$phpsessid)
+		$q_id=$_POST["q_id"];//接口参数
+		$phpsessid=$_POST["phpid"];//获取前端发送过来的phpsessid
+//		if(isset($_COOKIE['username']))
+		if($_COOKIE['PHPSESSID']==$phpsessid)
 		{
 			if($_SESSION["overtime"]>time())
 			{
-				$q_id=$param[0];
 				$sql="select * from question where q_id='$q_id'";
 				$result=$this->conn->selectBySql($sql);
 				if(count($result['data'])==1)//当查询的只有一条数据时返回数据，因为$q_id是主键

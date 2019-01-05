@@ -19,18 +19,21 @@ class AddQuestion{
     }
 	
 	//添加数据接口
-	public function addquestion($param){
+	//$_POST["q_No"];//试题编号
+	//$_POST["q_content"];//试题内容
+	//$_POST["board"];//json格式字符
+	public function addquestion(){
 		if(isset($_POST["ok"]))
 		{
 			//$_POST['phpid']前端发送过来的phpsessid
-			//$phpsessid=$_POST['phpid'];//获取前端发送过来的phpsessid
-			
+			$phpsessid=$_POST["phpid"];//获取前端发送过来的phpsessid
 			$q_No=$_POST["q_No"];//试题编号
 			$q_content=$_POST["q_content"];//试题内容
-			$board=trim($param[0]);//json格式字符
+			$board=trim($_POST["board"]);//json格式字符
 			$q_board=$board;//试题画板
 			
-			if(isset($_COOKIE['username']))//if($_COOKIE['PHPSESSID']==$phpsessid)
+			//if(isset($_COOKIE['username']))//
+			if($_COOKIE['PHPSESSID']==$phpsessid)
 			{	
 				if($_SESSION["overtime"]>time())
 				{
