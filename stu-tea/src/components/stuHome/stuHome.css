@@ -1,0 +1,35 @@
+ul {
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+ul>li:not(:nth-last-child(1)) {
+    margin-right: 50px;
+}
+ul>li, ul>li>nav {
+    width: 174.5px;
+    overflow: hidden;
+    display: inline-block;
+}
+ul>li>nav>img {
+    width: 96.5px;
+    height: 113.5px;
+    float: center;
+}
+ul>li>nav>a {
+    display: block;
+    width: 174.5px;
+    height: 52.5px;
+    background-image: url(../../../static/image/tubiao1.png);
+    background-size: 100% 100%;
+    float: center;
+    color: white;
+    font-size: 20px;
+    line-height: 52.5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+ul>li>nav>a:active {
+    opacity: 0.5;
+    -webkit-tap-highlight-color:transparent;
+}

@@ -1,0 +1,46 @@
+{
+    "extends": "tslint-config-standard",
+    "globals": {
+        "require": true
+    },
+    "rules": {
+        // 不需使用any类型
+        "no-any": false,
+        // 不允许使用var module = require("module"),用 import foo = require('foo')导入
+        "no-var-requires": true,
+        // 要求异步函数返回promise
+        "promise-function-async": true,
+        // 必须正确处理promise的返回函数
+        "no-floating-promises": true,
+        // 引号的使用规则
+        "quotemark": [true, "single", "jsx-double", "avoid-template", "avoid-escape"],
+        // 禁用 var
+        "no-var-keyword": true,
+        // 变量名规则
+        "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
+        // 分号的使用规则
+        "semicolon": false,
+        // 使用4空格进行缩进
+        "indent": [true, "spaces", 4],
+        "ter-indent": [true, 4],
+        // 强制接口 "I" 开头
+        "interface-name": [true, "always-prefix"],
+        // 单个文件最多几个类
+        "max-classes-per-file": [true, 1],
+        // 类名以大驼峰格式命名
+        "class-name": true,
+        // 不允许空格结尾
+        "no-trailing-whitespace": [
+            true,
+            "ignore-comments",
+            "ignore-jsdoc"
+        ],
+        // 建议使用T[]方式声明一个数组对象
+        "array-type": [true,"array"],
+        // 必须使用恒等号，进行等于比较
+        "triple-equals": true,
+        // 只允许使用isNaN方法检查数字是否有效
+        "use-isnan": true,
+        "no-empty": false
+    }
+}
