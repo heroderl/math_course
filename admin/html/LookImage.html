@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../css/zzsc-demo.css">
+<link type="text/css" rel="stylesheet" href="../css/jquery.galpop.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../css/LookImage.css"/>
+</head>
+<style type="text/css">
+	.header button
+	{
+		position: absolute;
+		top: 5px;
+		left: 20px;
+		right: 0;
+		bottom: 0;
+		background-image: url(../images/common/arrowleft.png);
+		width: 50px;
+		height: 50px;
+		background-size: cover;
+		-webkit-background-size: cover;	
+		background-color: transparent;	
+		border: none;
+	}
+</style>
+
+<body>
+	<div class="header">图片列表
+		<button id="back"></button>
+	</div>
+	<div class="container"><div class="gallery-wrappe"></div>
+</div>
+</body>
+
+<!--<script src="admin/js/jquery-1.11.0.min.js" type="text/javascript"></script>-->
+<script src="../js/jquery/jquery-1.7.1.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/galpop.js" type="text/javascript"  charset="utf-8" ></script>
+<script src="../js/new_file.js" type="text/javascript" charset="utf-8"></script>
+<script src="../config/config.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$(function(){
+		var LookImage = function(){
+			var result = {};
+				var ShowImage = function(){
+					var name=UrlParm.parm("name");
+					$.ajax({
+						type: "get",
+						url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "studentImage/image/" + name,
+						//dataType:'json',
+						async:false,
+						success: function(d) {
+							var obj = eval(d);
+							for(var i = 0 ; i < obj.length; i++)
+							{
+								var tdNode = $('<div class="Photo"><a class="galpop-multiple" data-galpop-group="multiple" href=" '+ 'http://' + urlConfig.host + ':' + urlConfig.post + "/math_course/studentImage/"+ name + "/" + obj[i] + '"><img src=" '+ "../../studentImage/"+ name + "/" + obj[i] + ' " class="img-thumbnail" alt="An apocalyptic Earth." /><p>' + obj[i] + '</p></a></div> ');
+
+								$('.gallery-wrappe').prepend( tdNode );//从最新的开始进行排序
+							}
+						},
+						error: function(d) {
+							//alert("读取失败");
+						},
+					});
+				}
+			result.ShowImage = ShowImage;
+			return result;
+		}
+		
+		var lookimage = new LookImage();
+		lookimage.ShowImage();
+		
+		$('.galpop-single').galpop();
+
+		$('.galpop-multiple').galpop();
+
+		$('.galpop-info').galpop();
+
+
+		var callback = function() {
+			var wrapper = $('#galpop-wrapper');
+			var info    = $('#galpop-info');
+			var count   = wrapper.data('count');
+			var index   = wrapper.data('index');
+			var current = index + 1;
+			var string  = 'Image '+ current +' of '+ count;
+			info.append('<p>'+ string +'</p>').fadeIn();
+		};
+		
+		$('.galpop-callback').galpop({
+			callback: callback
+		});
+
+		$('.manual-open').change(function(e) {
+			var image = $(this).val();
+			if (image) {
+				var settings = {};
+				$.fn.galpop('openBox',settings,image);
+			}
+		});
+
+		$('.manual-open-group').change(function(e) {
+			var v = $(this).val();
+			var images = [
+//				'images/gallery/large/apocalypse.jpg',
+			];
+			var settings = {};
+			$.fn.galpop('openBox',settings,images,v);
+		});
+		
+		$("#back").click(function() {
+			document.location = "ImageFile.html";
+		});
+	});
+</script>
+
+</html>

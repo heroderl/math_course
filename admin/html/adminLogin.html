@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>澳門精品課程</title>
+<link href="../css/authority/login_css.css" rel="stylesheet">
+<script src="../js/jquery/jquery-1.7.1.js"></script>
+</head>
+<body>
+	<div id="login_center">
+		<div id="login_area">
+			<div id="login_box">
+				<div class="logoInfo">
+					<img src="../images/login/LeGo.png">
+					<p style="font-size: 20px;">澳门濠江中学</p>
+					<p style="font-size: 15px;">技术支持：广东科学技术职业学院</p>
+				</div>
+				<div id="login_form">
+                    <form name="form1" id="formId" method="post" action="../../DAL/dateFile/Action_Login.php"  enctype="multipart/form-data"   style="overflow-x:hidden;width:670px;height:460px">
+						<div id="login_tip">
+							<span id="login_err" class="sty_txt2"></span>
+						</div>
+						
+						<div>用戶名：
+							<input type="text" name="t_No" class="username" id="name" >
+						</div>
+						
+						<div>密&nbsp;&nbsp;&nbsp;&nbsp;碼：
+							<input type="password" name="t_password" class="pwd" id="pwd" >
+						</div>
+						<div id="btn_area">
+							<input type="submit" name="ok" class="login_btn" id="login_sub" value="登  录">
+							<input type="reset" class="login_btn" id="login_ret" value="重  置">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</script>
+</html>

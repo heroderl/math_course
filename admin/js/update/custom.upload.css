@@ -1,0 +1,64 @@
+html,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu{margin:0;padding:0;}
+
+li{list-style: none;}
+.case{
+    overflow: hidden;
+    position: relative;
+}
+.upload{
+    width: 150px;
+    height: 150px;
+    background-color: #c3c3c3;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+input[type="file"]{
+    display: none;
+}
+li.item{
+    box-sizing: border-box;
+    width: 150px;
+    height: 150px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    cursor: pointer;
+}
+li.item:after{
+    content: '';
+    display: none;
+    width: 150px;
+    height: 150px;
+    background-image: url(imagess/a7.png);
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    background-position: center center;
+    background-color: rgba(0,0,0,0.3);
+}
+.upload.inempty:hover li.item:after{
+    display: block;
+}
+.upload{
+    float: left;
+    margin-right: 10px;
+}
+ul.caseCover{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+ul.caseCover>li{
+    display: block;
+    width: 150px;
+    height: 150px;
+    margin-right: 10px;
+    border: 1px solid #939393;
+    background-color:#c3c3c3;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+}
+

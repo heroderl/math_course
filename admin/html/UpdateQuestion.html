@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="../css/authority/basic_layout.css" rel="stylesheet" type="text/css">
+    <link href="../css/authority/common_style.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src=1."../js/jquery/jquery-1.7.1.js"></script>
+    <script src=u"../js/update/custom.upload.js"></script>
+    <link rel="stylesheet" href=u"../js/update/custom.upload.css">
+    <script type="text/javascript" src=b"../js/Button_Jugement/CRDU_Button.js"></script>
+    <script type="text/javascript" src=trim_in"../js/Button_Jugement/Jugement_Trim_Input.js"></script>
+    <style>
+    .duiqi{
+		float:left;
+	}
+    </style>
+</head>
+<body>
+    <input type="hidden" name="allIDCheck" value="" id="allIDCheck"/>
+    <input type="hidden" name="fangyuanEntity.fyXqName" value="" id="fyXqName"/>
+    <div id="container">
+        <div class="ui_content">
+            <div id="box_border">
+            	 <img src="../images/common/left.jpg" style="width: 50px; height: 15px;cursor: pointer; margin-left:92%; margin-top: 10px;" onclick="javascript :history.back(-1);">
+                <table class="custom_addQues_content" style="height: 700px;">
+                    <tr>
+                        <td>试题编号<br/><span style="color: darkred">(必填項)</span></td>
+                        <td>
+                            <textarea id="QuestionNo" name="q_No" rows="8" cols="75" style="margin-left:10px; width:50%; resize: none " maxlength="1005" class="textarea_custom"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>試題內容<br/><span style="color: darkred">(必填項)</span></td>
+                        <td>
+                        <img src="../images/common/arrowleft.png" style="width: 50px; height: 50px;cursor: pointer; padding-top:43px;" class="duiqi" id="ArrowLeft" >
+                        <div class="div_custom duiqi" id="div1">
+                        	  <input type="button" value="+" class="col">
+                              <input type="button" value="-" class="col">
+                              <input type="button" value="×" class="col">
+                              <input type="button" value="÷" class="col">
+                              <input type="button" value="±" class="col">
+                              <input type="button" value="／" class="col">
+                              <input type="button" value="＝" class="col">
+                              <input type="button" value="≈" class="col">
+                              <input type="button" value="≠" class="col">
+                              <input type="button" value="." class="col">
+                              
+                              <input type="button" value="π" class="col">
+                              <input type="button" value="∪" class="col">
+                              <input type="button" value="∩" class="col">
+                              <input type="button" value="∈" class="col">
+                              <input type="button" value="⊙" class="col">
+                              <input type="button" value="⊥" class="col">
+                              <input type="button" value="‖" class="col">
+                              <input type="button" value="≌" class="col">
+                              <input type="button" value="∽" class="col">
+                              <input type="button" value="＜" class="col">
+                              
+                              <input type="button" value="＞" class="col">
+                              <input type="button" value="≤" class="col">
+                              <input type="button" value="≥" class="col">
+                              <input type="button" value="∧" class="col">
+                              <input type="button" value="△" class="col">
+                              <input type="button" value="√" class="col">
+                              <input type="button" value="∝" class="col">
+                              <input type="button" value="∞" class="col">
+                              <input type="button" value="α" class="col">
+                              <input type="button" value="β" class="col">
+                        </div>
+                        <div style="display:none" class="div_custom duiqi dierye" id="div2">
+                        	  <input type="button" value="0" class="col">
+                              <input type="button" value="1" class="col">
+                              <input type="button" value="2" class="col">
+                              <input type="button" value="3" class="col">
+                              <input type="button" value="4" class="col">
+                              <input type="button" value="5" class="col">
+                              <input type="button" value="6" class="col">
+                              <input type="button" value="7" class="col">
+                              <input type="button" value="8" class="col">
+                              <input type="button" value="9" class="col">
+                              
+                              <input type="button" value="ω" class="col">
+                              <input type="button" value="％" class="col">
+                              <input type="button" value="℅" class="col">
+                              <input type="button" value="°" class="col">
+                              <input type="button" value="℃" class="col">
+                              <input type="button" value="℉" class="col">
+                              <input type="button" value="㎎" class="col">
+                              <input type="button" value="㎏" class="col">
+                              <input type="button" value="㎜" class="col">
+                              <input type="button" value="㎝" class="col">
+                              
+                              <input type="button" value="㎞" class="col">
+                              <input type="button" value="㎡" class="col">
+                              <input type="button" value="m" class="col">
+                              <input type="button" value="＄" class="col">
+                              <input type="button" value="￡" class="col">
+                              <input type="button" value="￥" class="col">
+                              <input type="button" value="㏒" class="col">
+                              <input type="button" value="㏑" class="col">
+                              <input type="button" value="³" class="col">
+                              <input type="button" value="ⁿ" class="col">
+                        </div>
+                        <img src="../images/common/arrowright.png" style="width: 50px; height: 50px;cursor: pointer; padding-top:43px; padding-left:10px;" class="duiqi" id="ArrowRight">
+                        <textarea class="q_content" name="q_content" rows="8" cols="75" style="margin-left:10px; resize: none " maxlength="1005" id="innn" ></textarea></td>
+                    	<!--<textarea name="q_content" class="q_content" rows="8" cols="75"></textarea>-->
+                    </tr>
+                    
+                    <tr id="Choicequestion">
+                        <td>画板<br/><p style="color: darkred">(必填項)</p></td>
+                        <td>
+                            <textarea id="q_board" name="q_board" style="margin-left:10px; resize: none" maxlength="256" class="textarea_custom" ></textarea>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>試題解析<br/></td>
+                        <td>
+                            <textarea name="q_other" style="margin-left:10px; resize: none" maxlength="256" class="textarea_custom" ></textarea></td>
+                    </tr>
+                    
+                        <tr>
+                            <td colspan="2">
+                                <div class="Button_submit">
+                                	<input type="button" id="reset" class="ui_input_btn03" value="重置">
+                                	<input type="submit" id="update" class="ui_input_btn03" name="ok"   value="修改">
+                                </div>
+                            </td>
+                        </tr>
+                </table>
+            </div>
+    </div>
+
+<script src=1."../js/jquery/jquery-1.8.3.min.js"></script>
+<script src="../js/jquery/jQuery.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/new_file.js" type="text/javascript" charset="utf-8"></script>
+<script src="../config/config.js" type="text/javascript" charset="utf-8"></script>
+
+<script>
+    $(function(){
+    	var UpdateQuestion = function(){
+    		var result = {};
+    		
+    		var aa="";
+			var cc="";
+			var a = 0;
+
+    		
+			function showQuestion() {
+				var name=UrlParm.parm("name");
+		    	$.ajax({
+		    		type:"post",
+		    		url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "LookQuestion/lookquestion/" + name,
+		    		async:true,
+		    		dataType:'json',
+		    		success: function(d) {
+		    			var obj = eval(d);
+						$("#QuestionNo").val(obj.data[0].q_No);
+						$(".q_content").val(obj.data[0].q_content);
+						$("#q_board").val(obj.data[0].q_board);
+					},
+					error : function(d) {
+		//				alert("失败");
+					}
+		    	});
+			}
+			
+			function change() {
+				var myDate = new Date();
+				var name = UrlParm.parm("name");
+				 jQuery.support.cors = true;
+				$.ajax({
+					type:"post",
+					url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "UpdateQuestion/updatequestion/" + name,
+					async:true,
+					dataType:'json',
+					data:{ 
+						'q_content':$(".q_content").val(),
+						'q_board' : $("#q_board").val()
+					},
+					success: function(data) {
+						alert("修改成功！");
+						document.location='http://' + urlConfig.host + ':' + urlConfig.post +'/math_course/admin/html/showAllTestQuestion.html';
+//						location.reload('http://localhost/math_course/admin/showAllTestQuestion.html');
+//						window.history.go(-1);
+//						location.reload();
+						
+					},
+					error: function(xml, status, error) {
+						alert("修改失败！");
+						
+						location.reload();
+						window.history.go(-1);
+					}
+				});
+			}
+
+			// 添加特殊符号
+    		function outdata(e) {
+			    var rangeStart = document.getElementById("innn").selectionStart;
+				var rangeEnd=document.getElementById("innn").selectionEnd;
+				var tempStr1=document.getElementById("innn").value.substring(0,rangeStart);
+				var tempStr2=document.getElementById("innn").value.substring(rangeEnd);
+			    var _buttonValue = this.value;
+				cc=_buttonValue;
+				aa=tempStr1+cc+tempStr2;
+				document.getElementById("innn").value=aa;
+				document.getElementById("innn").setSelectionRange(rangeEnd + 1, rangeEnd + 1);
+			}
+    		
+    		function ArrowLeft() {
+    			div1.style.display="flex";
+				div2.style.display="none";
+    		}
+    		
+    		function ArrowRight() {
+    			div2.style.display="flex";
+				div1.style.display="none";
+    		}
+    
+    		result.showQuestion = showQuestion;
+    		result.change = change;
+    		result.outdata = outdata;
+    		result.ArrowLeft = ArrowLeft;
+    		result.ArrowRight = ArrowRight;
+    		result.a = a;
+    		return result;
+    	}
+    	
+    	var updatequestion = new UpdateQuestion();
+    	updatequestion.showQuestion();
+    	
+    	$('#update').on('click', function() {
+			updatequestion.change();
+		});
+		
+		$('#ArrowLeft').on('click', function() {
+			updatequestion.ArrowLeft();
+		});
+		
+		$('#ArrowRight').on('click', function() {
+			updatequestion.ArrowRight();
+		});
+		
+		$('#reset').on('click', function() {
+			updatequestion.showQuestion();
+		});
+		
+		$('#div1, #div2').on('click', '.col', updatequestion.outdata);
+    });
+    
+    
+</script>
+</body>
+</html>

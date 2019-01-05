@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="../css/authority/basic_layout.css" rel="stylesheet" type="text/css">
+    <link href="../css/authority/common_style.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="../js/jquery/jQuery.js"></script>
+    <script src="../js/update/custom.upload.js"></script>
+    <link rel="stylesheet" href="../js/update/custom.upload.css">
+    <script type="text/javascript" src="../js/Button_Jugement/CRDU_Button.js"></script>
+    <script type="text/javascript" src="../js/Button_Jugement/Jugement_Trim_Input.js"></script>
+    <style>
+    .duiqi{
+		float:left;
+	}
+    
+    </style>
+</head>
+<body>
+    <input type="hidden" name="allIDCheck" value="" id="allIDCheck"/>
+    <input type="hidden" name="fangyuanEntity.fyXqName" value="" id="fyXqName"/>
+    <div id="container">
+        <!--<form name="form1" id="formId" method="post" action="http://localhost/math_course/common/index.php/AddQuestion/addquestion/" enctype="multipart/form-data"   onSubmit="return chkinput(this)" >-->
+        <div class="ui_content">
+            <div id="box_border">
+                <table class="custom_addQues_content" style="height: 700px;">
+                    <tr>
+                        <td>试题编号<br/><span style="color: darkred">(必填項)</span></td>
+                        <td>
+                            <textarea id="q_No" name="q_No" rows="8" cols="75" style="margin-left:10px; width:50%; resize: none " maxlength="1005" class="textarea_custom"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>試題內容<br/><span style="color: darkred">(必填項)</span></td>
+                        <td>
+                        <img src="../images/common/arrowleft.png" style="width: 50px; height: 50px;cursor: pointer; padding-top:43px;" onclick="ArrowLeft()" class="duiqi" >
+                        <div class="div_custom duiqi" id="div1">
+                        	  <input type="button" value="+" class="col">
+                              <input type="button" value="-" class="col">
+                              <input type="button" value="×" class="col">
+                              <input type="button" value="÷" class="col">
+                              <input type="button" value="±" class="col">
+                              <input type="button" value="／" class="col">
+                              <input type="button" value="＝" class="col">
+                              <input type="button" value="≈" class="col">
+                              <input type="button" value="≠" class="col">
+                              <input type="button" value="." class="col">
+                              
+                              <input type="button" value="π" class="col">
+                              <input type="button" value="∪" class="col">
+                              <input type="button" value="∩" class="col">
+                              <input type="button" value="∈" class="col">
+                              <input type="button" value="⊙" class="col">
+                              <input type="button" value="⊥" class="col">
+                              <input type="button" value="‖" class="col">
+                              <input type="button" value="≌" class="col">
+                              <input type="button" value="∽" class="col">
+                              <input type="button" value="＜" class="col">
+                              
+                              <input type="button" value="＞" class="col">
+                              <input type="button" value="≤" class="col">
+                              <input type="button" value="≥" class="col">
+                              <input type="button" value="∧" class="col">
+                              <input type="button" value="△" class="col">
+                              <input type="button" value="√" class="col">
+                              <input type="button" value="∝" class="col">
+                              <input type="button" value="∞" class="col">
+                              <input type="button" value="α" class="col">
+                              <input type="button" value="β" class="col">
+                        </div>
+                        <div style="display:none" class="div_custom duiqi dierye" id="div2">
+                        	  <input type="button" value="0" class="col">
+                              <input type="button" value="1" class="col">
+                              <input type="button" value="2" class="col">
+                              <input type="button" value="3" class="col">
+                              <input type="button" value="4" class="col">
+                              <input type="button" value="5" class="col">
+                              <input type="button" value="6" class="col">
+                              <input type="button" value="7" class="col">
+                              <input type="button" value="8" class="col">
+                              <input type="button" value="9" class="col">
+                              
+                              <input type="button" value="ω" class="col">
+                              <input type="button" value="％" class="col">
+                              <input type="button" value="℅" class="col">
+                              <input type="button" value="°" class="col">
+                              <input type="button" value="℃" class="col">
+                              <input type="button" value="℉" class="col">
+                              <input type="button" value="㎎" class="col">
+                              <input type="button" value="㎏" class="col">
+                              <input type="button" value="㎜" class="col">
+                              <input type="button" value="㎝" class="col">
+                              
+                              <input type="button" value="㎞" class="col">
+                              <input type="button" value="㎡" class="col">
+                              <input type="button" value="m" class="col">
+                              <input type="button" value="＄" class="col">
+                              <input type="button" value="￡" class="col">
+                              <input type="button" value="￥" class="col">
+                              <input type="button" value="㏒" class="col">
+                              <input type="button" value="㏑" class="col">
+                              <input type="button" value="³" class="col">
+                              <input type="button" value="ⁿ" class="col">
+                        </div>
+                        <img src="../images/common/arrowright.png" style="width: 50px; height: 50px;cursor: pointer; padding-top:43px; padding-left:10px;" onclick="ArrowRight()" class="duiqi" >
+                        <textarea class="q_content" name="q_content" rows="8" cols="75" style="margin-left:10px; resize: none " maxlength="1005" class="bigtextarea_custom" id="innn" ></textarea></td>
+                    </tr>
+                    
+                    <tr id="Choicequestion">
+                        <td>画板<br/><p style="color: darkred">(必填項)</p></td>
+                        <td>
+                            <textarea id="q_board" name="q_board" style="margin-left:10px; resize: none" maxlength="256" class="textarea_custom" ></textarea>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>試題解析<br/></td>
+                        <td>
+                            <textarea name="q_other" style="margin-left:10px; resize: none" maxlength="256" class="textarea_custom" ></textarea></td>
+                    </tr>
+                    
+                        <tr>
+                            <td colspan="2">
+                                <div class="Button_submit">
+                                 <input type="submit" class="ui_input_btn03" name="ok"   value="添加">
+                                </div>
+                            </td>
+                        </tr>
+                </table>
+            </div>
+        <!--</form>-->
+    </div>
+<script>
+	function ArrowLeft(){
+		div1.style.display="flex";
+		div2.style.display="none";
+		}
+	function ArrowRight(){
+		div2.style.display="flex";
+		div1.style.display="none";
+		}
+</script>
+
+<script src="../js/jquery/jQuery.js"></script>
+<script src="../config/config.js" type="text/javascript" charset="utf-8"></script>
+
+<script>
+    $(function(){
+    	var AddTestQuest = function(){
+    		var result = {};
+    		
+    		function addtest(){
+    			$.ajax({
+		    		type:"POST",
+		    		url:'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "AddQuestion/addquestion/"+"&"+"t="+Math.random(),
+		    		dataType:'json',
+		    		data:{
+		    			"ok": "ok",
+		    			"q_No": $("#q_No").val(),
+		    			"q_content": $(".q_content").val(),
+		    			"q_board": $("#q_board").val()
+		    		},
+		    		success: function(data) {
+		    			alert("添加成功！");
+		    			location.reload();
+		    		},
+		    		error: function(xml, status, error) {
+		    			alert("添加失败！");
+		    			location.reload();
+		    		}
+    			});
+    		}
+    		
+    		
+    		function outdata(e) {
+			    var rangeStart = document.getElementById("innn").selectionStart;
+				var rangeEnd=document.getElementById("innn").selectionEnd;
+				var tempStr1=document.getElementById("innn").value.substring(0,rangeStart);
+				var tempStr2=document.getElementById("innn").value.substring(rangeEnd);
+			    var _buttonValue = this.value;
+				cc=_buttonValue;
+				aa=tempStr1+cc+tempStr2;
+				document.getElementById("innn").value=aa;
+				document.getElementById("innn").setSelectionRange(rangeEnd + 1, rangeEnd + 1);
+			}
+    		
+    		function ArrowLeft() {
+    			div1.style.display="flex";
+				div2.style.display="none";
+    		}
+    		
+    		function ArrowRight() {
+    			div2.style.display="flex";
+				div1.style.display="none";
+    		}
+    
+    		result.outdata = outdata;
+    		result.ArrowLeft = ArrowLeft;
+    		result.ArrowRight = ArrowRight;
+    		result.addtest = addtest;
+    		return result;
+    	}
+    	
+    	
+    	
+    	var addTestQuest = new AddTestQuest();
+    	
+    	$('.ui_input_btn03').on('click', function() {
+			addTestQuest.addtest();
+		});
+		
+		$('#ArrowLeft').on('click', function() {
+			addTestQuest.ArrowLeft();
+		});
+		
+		$('#ArrowRight').on('click', function() {
+			addTestQuest.ArrowRight();
+		});
+		
+		$('#div1, #div2').on('click', '.col', addTestQuest.outdata);
+    })
+</script>
+</body>
+</html>

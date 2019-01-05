@@ -1,0 +1,240 @@
+<!--///<reference path="scripts/jquery/jquery-1.8.3.min.js" />-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../css/authority/basic_layout.css" rel="stylesheet" type="text/css">
+<link href="../css/authority/common_style.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	table#table>thead{background-color: rgb(4, 69, 153); color: white; font-size: 14px; font-weight: 700;}
+	table#table>thead>tr>th{height: 37px; line-height: 20px; border: 1px solid rgb(2, 57, 127); text-align: center;}
+</style>
+<title>信息管理系统</title>
+</head>
+
+<body>
+	<form id="submitForm" name="submitForm" action="" method="post">
+		<div id="all">
+		<input type="hidden" name="allIDCheck" value="" id="allIDCheck"/>
+		<input type="hidden" name="fangyuanEntity.fyXqName" value="" id="fyXqName"/>
+		<div id="container">
+			<div class="ui_content">
+				<div class="ui_tb">
+					<table id="table" class="table" cellspacing="0" cellpadding="0" width="100%" align="center" border="0">
+                        <thead>
+                            <th width="10%">试题编号</th>
+                            <th width="40%">内容</th>
+                            <th width="20%">时间</th>
+                            <th width="10%">推送状态</th>
+                            <th width="20%">操作</th>
+                        </thead>
+						<tbody></tbody>
+					</table>
+				</div>
+				<div class="ui_tb_h30">
+                    <div class="ui_flt" id="ui_flt" style="height: 30px; line-height: 30px;">共有
+                    	<span class="ui_txt_bold04"></span>條記錄，當前為
+                        <span class="ui_txt_bold04"> /</span>頁
+                    </div>
+                    <div class="ui_frt">
+                        <!--    如果是第一页，则只显示下一页、尾页 -->
+                        <a style="text-decoration:none" class="ui_input_btn01"><input type="button" value="首頁" class="ui_input_btn01" id="FirstPage"/></a>
+                        <a style="text-decoration:none" class="ui_input_btn01"><input type="button" value="上一頁" class="ui_input_btn01" id="LastPage"/></a>
+                        <a style="text-decoration:none" class="ui_input_btn01"><input type="button" value="下一頁" class="ui_input_btn01" id="NextPage"/></a>
+                        <a style="text-decoration:none" class="ui_input_btn01"><input type="button" value="尾頁" class="ui_input_btn01" id="EndPage"/></a>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+<script type="text/javascript" src="../js/jquery/jquery-1.8.3.min.js"></script>
+<script src="../js/jquery/jquery-1.7.1.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery/jQuery.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/new_file.js" type="text/javascript" charset="utf-8"></script>
+<script src="../config/config.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+	$(function() {
+		var MathCourse = function(){
+			
+			var result = {};
+			var page = 1 ;	//页码
+			var ListNum = 0 ; //用于获得数据行数
+			var TotalNum ;
+			
+			function FirstPage() {
+				var result = {};
+				var that = this;
+				$.ajax({
+					type: "get",
+					url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "ShowQuestion/showquestion/10/1"+"&"+"t="+Math.random(),
+					dataType:'json',
+					async:false,//改异步显示数据
+					success: function(d) {
+						var obj = eval(d);
+						for(var i = 0 ; i < obj['data'].length; i++)
+						{
+							var tdNode1 = $('<td height="21" bgcolor="#FFFFFF" data-qid="' + obj['data'][i].q_id + '"><div align="center" class="number">' + obj['data'][i].q_No + '</div></td>');
+							var tdNode2 = $('<td height="21" bgcolor="#FFFFFF"><div align="center" class="number">' + obj['data'][i].q_content + '</div></td>');
+							var tdNode3 = $('<td height="21" bgcolor="#FFFFFF"><div align="center" class="number">' + obj['data'][i].q_time + '</div></td>');
+							var tdNode4 = $('<td height="21" bgcolor="#FFFFFF"><div align="center" class="number">' + obj['data'][i].q_state + '</div></td>');
+							var tdNode5 = $('<td height="21" bgcolor="#FFFFFF"><div align="center" class="number"><a style="text-decoration:none" href="lookTestQuest.html?name=' + obj['data'][i].q_id + '">查看&nbsp;</a><a style="text-decoration:none" href="UpdateQuestion.html?name=' + obj['data'][i].q_id + '">修改&nbsp;</a><a style="text-decoration:none" class="delete">删除</a></div></td>');
+							var trNode = $('<tr></tr>');
+							trNode.append(tdNode1, tdNode2, tdNode3, tdNode4, tdNode5);
+							$('table#table>tbody').append( trNode );
+						}
+						ListNum = obj['data'].length ;
+						totalNum();
+						var totao = document.getElementById("ui_flt");
+						totao.innerHTML = "共有" + ListNum + "条记录 ,当前为第" + page + '/' + Math.ceil(that.TotalNum/10) + "页";
+						
+					},
+					error: function(d) {
+//						alert("读取失败");
+					}
+				});
+				
+				result.FirstPage = FirstPage;
+				return result;
+			};
+			
+			function ChangePage(page){
+				
+				var result = {};
+				var that = this;
+				
+				if (this.page > Math.ceil(this.TotalNum/10)) {
+					this.page = Math.ceil(this.TotalNum/10);
+					return;
+				} else if (this.page <= 0) {
+					this.page = 1;
+					return;
+				} else {
+					$("tbody").find("tr").remove();
+					$.ajax({
+						type: "get",
+						url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "ShowQuestion/showquestion/10/" + page +"&"+"t="+Math.random(),
+						dataType:'json',
+					    async:false,//改异步显示数据
+						success: function(d) {
+							var obj = eval(d);
+							
+							for(var i = 0 ; i < obj['data'].length; i++)
+							{
+								var tdNode1 = $('<td height="21" bgcolor="#FFFFFF" data-qid="' + obj['data'][i].q_id + '"><div align="center" class="number">' + obj['data'][i].q_No + '</div></td>');
+								var tdNode2 = $('<td height="21" bgcolor="#FFFFFF"><div align="center" class="number">' + obj['data'][i].q_content + '</div></td>');
+								var tdNode3 = $('<td height="21" bgcolor="#FFFFFF"><div align="center" class="number">' + obj['data'][i].q_time + '</div></td>');
+								var tdNode4 = $('<td height="21" bgcolor="#FFFFFF"><div align="center" class="number">' + obj['data'][i].q_state + '</div></td>');
+								var tdNode5 = $('<td height="21" bgcolor="#FFFFFF"><div align="center" class="number"><a style="text-decoration:none" href="lookTestQuest.html?name=' + obj['data'][i].q_id + '">查看&nbsp;</a><a style="text-decoration:none" href="UpdateQuestion.html?name=' + obj['data'][i].q_id + '">修改&nbsp;</a><a style="text-decoration:none"  class="delete">删除</a></div></td>');
+								var trNode = $('<tr></tr>');
+								trNode.append(tdNode1, tdNode2, tdNode3, tdNode4, tdNode5);
+								$('table#table>tbody').append( trNode );
+							}
+							ListNum = obj['data'].length ;
+							
+							var totao = document.getElementById("ui_flt");
+							totao.innerHTML = "共有" + ListNum + "条记录 ,当前为第" + page + '/' + Math.ceil(that.TotalNum/10) + "页";
+							
+						},
+						error: function(d) {
+			//					alert("读取失败");
+						}
+					});
+				}
+				
+				
+				result.ChangePage = ChangePage;
+				return result;
+			};
+			
+			function deletee(thiss){
+				var result = {};
+				var i = thiss.target.parentNode.parentNode.parentNode.firstChild.getAttribute('data-qid');
+				$.ajax({
+					type: "get",
+					url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "ShowQuestion/deletequestion/" + i ,
+					dataType:'json',
+					async:false,//改异步显示数据
+					success: function(d) {
+						console.log("删除成功");
+						alert("删除成功");
+					},
+					error : function(d) {
+						alert("删除失败");
+						console.log("删除失败");
+					}
+				});
+				
+				result.deletee = deletee;
+				return result;
+			}
+			
+			function totalNum(){
+				var result = {};
+				
+				var that = this;
+				
+				$.ajax({
+					type: "get",
+					url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "ShowQuestion/sumnum" ,
+					dataType:'json',
+					async:false,//改异步显示数据
+					success: function(d) {
+						var obj = eval(d);
+						that.TotalNum = parseInt(obj.data[0].count);
+					},
+					error: function(d) {
+//						alert("失败");
+					}
+				});
+				
+				result.TotalNum = TotalNum;
+				result.totalNum = totalNum;
+				return result;
+			}
+			
+			result.page = page;
+			result.TotalNum = TotalNum;
+			result.ListNum = ListNum;
+			result.FirstPage = FirstPage;
+			result.ChangePage = ChangePage;
+			result.deletee = deletee;
+			result.totalNum = totalNum;
+			return result;
+		};
+		
+		var mathcourse = new MathCourse();
+		mathcourse.totalNum();
+		mathcourse.FirstPage();
+		
+		$('#FirstPage').on('click', function() {
+			mathcourse.page = 1 ;
+			mathcourse.ChangePage(mathcourse.page);
+		});
+		
+		$('#LastPage').on('click', function() {
+			mathcourse.page -= 1 ;
+			mathcourse.ChangePage(mathcourse.page);
+		});
+		
+		$('#NextPage').on('click', function() {
+			mathcourse.totalNum();
+			mathcourse.page += 1 ;
+			mathcourse.ChangePage(mathcourse.page);
+		});
+		
+		$('#EndPage').on('click', function() {
+			mathcourse.page = Math.ceil(mathcourse.TotalNum/10) ;
+			mathcourse.ChangePage(mathcourse.page);
+		});
+		
+		$('table#table>tbody').on('click', 'tr a.delete', function(e) {
+			mathcourse.deletee(e);
+			location.reload();
+		});
+	});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="../css/authority/basic_layout.css" rel="stylesheet" type="text/css">
+    <link href="../css/authority/common_style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href=no"../css/lazyLoad/normalize.css">
+    <link rel="stylesheet" href="../css/lazyLoad/style.css">
+    <title>試題詳情</title>
+</head>
+
+<body>
+<p>
+  <input type="hidden" name="allIDCheck" value="" id="allIDCheck"/>
+  <input type="hidden" name="fangyuanEntity.fyXqName" value="" id="fyXqName"/>
+</p>
+<div id="container">
+    <table class="table" cellspacing="0" cellpadding="0"  align="center" border="0" style="overflow:scroll;width: 96%;height: 700px;">
+        <tr>
+            <td>
+                <div align="center"></div>
+                <div>
+                    <div style="text-align:left;">&nbsp;&nbsp;试题内容：
+                        <img src="../images/common/left.jpg" style="width: 50px; height: 15px;cursor: pointer; margin-left:92%;" onclick="javascript :history.back(-1);">
+                    </div>
+                    <textarea name="textarea" class="textarea_custom"  style="resize: none; height:150px; " readonly ></textarea>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <canvas id="TabbedPanels1" class="TabbedPanels" style="height: 400px; width: 100%; background-color: white;" >
+                </canvas>
+            </td>
+        </tr>
+   
+    </table>
+</div>
+
+<script src=1."../js/jquery/jquery-1.8.3.min.js"></script>
+<script src="../js/jquery/jquery-1.7.1.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery/jQuery.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/new_file.js" type="text/javascript" charset="utf-8"></script>
+<script src="../config/config.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(function(){
+    	var LookTestQuest = function(){
+    		var result = {};
+    		
+			function showQuest(){
+    			var result = {};
+    			var name=UrlParm.parm("name");
+		    	$.ajax({
+		    		type:"post",
+		    		url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "LookQuestion/lookquestion/" + name,
+		    		async:true,
+		    		dataType:'json',
+		    		success: function(d) {
+		    			var obj = eval(d);
+						$(".textarea_custom").val(obj.data[0].q_content);
+					},
+					error : function(d) {
+		//				alert("失败");
+					}
+		    	});
+		    	result.showQuest = showQuest;
+		    	return result;
+    		}
+    		
+    		result.showQuest = showQuest;
+    		return result;
+    	}
+    	
+    	var looktestQuest = new LookTestQuest();
+    	looktestQuest.showQuest();
+    });
+</script>
+
+</body>
+</html>
