@@ -1,0 +1,33 @@
+
+
+作用：  根据时间日期查找相对应的试题
+url:       math_course/admin/FindQuestion.php
+方法名: questiontime()
+参数：
+           $_POST["q_time"] : 时间(年月日2018-12-02)
+返回值:json格式的相同日期的所有试题数据
+
+
+作用：  返回question表里面的所有数据
+url:       math_course/admin/FindQuestion.php
+方法名: allquestion()
+参数：
+           无
+返回值:json格式的所有试题数据
+
+
+作用： 推送试题改变推送状态
+url:       math_course/admin/FindQuestion.php
+方法名: choose()
+参数：
+           $_POST["q_id"] :试题id
+           $_POST["q_state"] :推送状态(0或者1)
+返回值:(200, "查询成功", array('success'))或(404, "查询失败")
+
+
+作用： 查看试题的画板
+url:       math_course/admin/FindQuestion.php
+方法名: lookboard()
+参数：
+           $_POST["q_id"] :试题id
+返回值:json格式的指定试题id数据
