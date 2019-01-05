@@ -32,6 +32,10 @@ npm run e2e
 npm test
 ```
 
+# npm install 安装问题
+npm 报错 chromedriver@2.41.0 install: `node install.js`
+解决：手动执行 npm install chromedriver --chromedriver_cdnurl=http://cdn.npm.taobao.org/dist/chromedriver
+
 
 # knowledge that update vue with webpack
 https://blog.csdn.net/qq_16559905/article/details/79404173
