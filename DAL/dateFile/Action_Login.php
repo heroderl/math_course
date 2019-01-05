@@ -26,6 +26,9 @@ if(isset($_POST["ok"]))
 		//header("Set-Cookie: username='$username'; path=/; expires=".gmstrftime("%A, %d-%b-%Y %H:%M:%S GMT",time()+3600));
 		//$num=$_COOKIE['username'];
 		//echo "<script>alert('$num');</script>";
+		
+		
+		
 	}
 	
 	
