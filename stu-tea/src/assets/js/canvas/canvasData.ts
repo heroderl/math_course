@@ -4,9 +4,9 @@ import { Tools, InterCircular, InterFan } from './interface/inter-toolslib';
  * 存放canvas上的图形数据
  */
 export class CanvasData {
-    private data: Array<Tools>;  // 存放数据
+    private data: Tools[];  // 存放数据
 
-    constructor() {
+    constructor () {
         this.data = [];
     }
 
@@ -14,7 +14,7 @@ export class CanvasData {
     * 存放数据
     * @param: data 类型为Tools
     */
-    setData(data: Tools): void {
+    setData (data: Tools): void {
         this.data.push(data);
     }
 
@@ -22,7 +22,7 @@ export class CanvasData {
     * 获取数据
     * @param: item 可选，表示数组下标
     */
-    getData(item?: number): Tools | Array<Tools> {
+    getData (item?: number): Tools | Tools[] {
         if (typeof(item) !== 'undefined' && item < this.data.length) {
             return this.data[item];
         } else {
@@ -34,7 +34,7 @@ export class CanvasData {
     * 删除数据
     * @param: item 可选，表示数组下标 [(点、线段、圆), (扇形、半径), (弦)]
     */
-    delData(item?: Array<number>): Tools {
+    delData (item?: number[]): Tools {
         if (!item || item.length === 0) {
             return this.data.pop();
         } else if (item.length === 1 && item[0] < this.data.length) {

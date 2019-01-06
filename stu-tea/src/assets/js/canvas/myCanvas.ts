@@ -52,7 +52,7 @@ export default class MyCanvas {
     letterFlag: LetterFlag;  // 字母标志
 
     constructor () {
-        this.eventClick = this.isMobile() ? 'tap' : 'click';
+        this.eventClick = this.isMobile() ? 'click' : 'click';
         this.eventStart = this.isMobile() ? 'touchstart' : 'mousedown';
         this.eventMove = this.isMobile() ? 'touchmove' : 'mousemove';
         this.eventEnd = this.isMobile() ? 'touchend' : 'mouseup';

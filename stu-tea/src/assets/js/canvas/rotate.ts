@@ -16,7 +16,7 @@ export class Rotate {
     private y: number;  // 圆心y坐标
     private oldAngle: number;  // 旧角度
     private newAngle: number;  // 新角度
-    private index: Array<number>;  // 被选中图形下标
+    private index: number[];  // 被选中图形下标
     private oldXY: number;  // 保存就的鼠标里线段起点的距离
     private eventFlag: boolean;  // true表示开始点击，false表示结束点击
     private eventCount: number;  // 点击次数
@@ -24,19 +24,19 @@ export class Rotate {
     private myCanvas: CanvasRenderingContext2D;  // canvas对象
     private myCanvasNode: HTMLElement;  // canvas节点
     private rePaint: RePaint;  // 重绘图形
-    private AuxiliaryListen: AuxiliaryListen;  // 辅助工具
+    private auxiliaryListen: AuxiliaryListen;  // 辅助工具
     private canvasData: CanvasData;  // 存放canvas上的图形数据
     private canvasChoosed: CanvasChoosed;  // 选中图形
     private intersect: Intersect;  // 相交
 
-    constructor(isMobild: boolean, myCanvas: CanvasRenderingContext2D, myCanvasNode: HTMLElement, rePaint: RePaint, AuxiliaryListen: AuxiliaryListen, canvasData: CanvasData, canvasChoosed: CanvasChoosed, intersect: Intersect) {
+    constructor(isMobild: boolean, myCanvas: CanvasRenderingContext2D, myCanvasNode: HTMLElement, rePaint: RePaint, auxiliaryListen: AuxiliaryListen, canvasData: CanvasData, canvasChoosed: CanvasChoosed, intersect: Intersect) {
         this.isMobild = isMobild;
         this.myCanvas = myCanvas;
         this.myCanvasNode = myCanvasNode;
         this.rePaint = rePaint;
         this.eventFlag = false;
         this.eventCount = 0;
-        this.AuxiliaryListen = AuxiliaryListen;
+        this.auxiliaryListen = auxiliaryListen;
         this.canvasData = canvasData;
         this.canvasChoosed = canvasChoosed;
         this.intersect = intersect;
@@ -78,7 +78,7 @@ export class Rotate {
      * 监听mouseomove事件
      */
     moveCallback(e: Event): void {
-        if (!!this.eventFlag && this.eventCount === 1) {
+        if (this.eventFlag && this.eventCount === 1) {
             // 旋转扇形或半径或线段
 
             let x = 0, y = 0;
@@ -245,13 +245,13 @@ export class Rotate {
      * 监听mouseend事件
      */
     endCallback(e: Event): void {
-        if (!!this.eventFlag && this.eventCount === 1) {
+        if (this.eventFlag && this.eventCount === 1) {
             // 不动
             this.eventFlag = false;
             this.eventCount = 0;
 
             // 恢复辅助按钮标志
-            this.AuxiliaryListen.recoverButtonFlag();
+            this.auxiliaryListen.recoverButtonFlag();
 
             // 清除图形选中
             this.canvasChoosed.cancleSelected();
@@ -278,6 +278,6 @@ export class Rotate {
     private rotatexy(ox: number, oy: number, px: number, py: number, angle: number): {x: number, y: number} {
         let x = px * Math.cos(angle) + py * Math.sin(angle) + ox;
         let y = px * Math.sin(angle) - py * Math.cos(angle) + oy;
-        return {x: x, y: y};
+        return { x, y };
     }
 }

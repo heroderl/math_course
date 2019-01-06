@@ -7,7 +7,7 @@ import { CanvasChoosed } from './canvasChoosed';
  * 直线与直线，直线与圆相交
  */
 export class Intersect {
-    private pointData: Array<{x: number, y: number}>;
+    private pointData: {x: number, y: number}[];
     private myCanvas: CanvasRenderingContext2D;  // canvas对象
     private canvasChoosed: CanvasChoosed;  // 选中图形
     private canvasData: CanvasData;  // 存放canvas上的图形数据
@@ -91,7 +91,7 @@ export class Intersect {
             b2 = seg2[0].y - k2 * seg2[0].x;
             // 线段1和线段2斜率相同
             if (k1 === k2) {
-                return {flag: false, x: 0, y: 0};
+                return { flag: false, x: 0, y: 0 };
             } else {
                 ox = (b2 - b1) / (k1 - k2);
                 oy = (b1 * k2 - b2 * k1) / (k2 - k1);
@@ -106,12 +106,12 @@ export class Intersect {
                     return v1 - v2;
                 });
                 if (sa[0] <= ox && ox <= sa[1] && sb[0] <= ox && ox <= sb[1]) {
-                    return {flag: true, x: ox, y: oy};
+                    return { flag: true, x: ox, y: oy };
                 } else {
-                    return {flag: false, x: 0, y: 0};
+                    return { flag: false, x: 0, y: 0 };
                 }
             }
-        })([{x: seg1.x, y: seg1.y}, {x: x1, y: y1}], [{x: seg2.x, y: seg2.y}, {x: x2, y: y2}]);
+        })([{ x: seg1.x, y: seg1.y }, { x: x1, y: y1 }], [{ x: seg2.x, y: seg2.y }, { x: x2, y: y2 }]);
 
         return cover;
     }
@@ -121,13 +121,13 @@ export class Intersect {
      * @param seg 线段
      * @param cir 圆
      */
-    circular(seg: InterSegment, cir: InterCircular): {flag: boolean, point: Array<{x: number, y: number}>} {
+    circular(seg: InterSegment, cir: InterCircular): {flag: boolean, point: {x: number, y: number}[]} {
         let x = Math.cos(seg.angle) * seg.r + seg.x;
         let y = Math.sin(seg.angle) * seg.r + seg.y;
 
         // 找出相交的点
         let cover = (function(seg: [{x: number, y: number}, {x: number, y: number}], cir: {x: number, y: number, r: number}) {
-            let k = 0, b = 0, A: number, B: number, C: number, del: number, res: [{x: number, y: number}, {x: number, y: number}] = [{x: 0, y: 0}, {x: 0, y: 0}];
+            let k = 0, b = 0, A: number, B: number, C: number, del: number, res: [{x: number, y: number}, {x: number, y: number}] = [{ x: 0, y: 0 }, { x: 0, y: 0 }];
 
             if (seg[0].x === seg[1].x) {
                 // 垂直
@@ -139,7 +139,7 @@ export class Intersect {
                 del = B * B - 4 * A * C;
                 if (del < 0) {
                     // 无根
-                    return {flag: false, point: []};
+                    return { flag: false, point: [] };
                 } else if (del === 0) {
                     // 有一个交点
                     res[0].x = seg[0].x;
@@ -153,9 +153,9 @@ export class Intersect {
                     });
 
                     if (sa[0] <= res[0].x && res[0].x <= sa[1] && (cir.x - cir.r) <= res[0].x && res[0].x <= (cir.x + cir.r)) {
-                        return {flag: true, point: [{x: res[0].x, y: res[0].y}]};
+                        return { flag: true, point: [{ x: res[0].x, y: res[0].y }] };
                     } else {
-                        return {flag: false, point: []};
+                        return { flag: false, point: [] };
                     }
                 } else if (del > 0) {
                     // 有两个交点
@@ -171,7 +171,7 @@ export class Intersect {
                         return v1 - v2;
                     });
 
-                    let result = {flag: false, point: Array<{x: number, y: number}>()};
+                    let result = { flag: false, point: Array<{x: number, y: number}>() };
                     if (sa[0] <= res[0].x && res[0].x <= sa[1] && (cir.x - cir.r) <= res[0].x && res[0].x <= (cir.x + cir.r)) {
                         result.flag = true;
                         result.point.push(res[0]);
@@ -206,7 +206,7 @@ export class Intersect {
             // 求出交点
             if (del < 0) {
                 // 无根
-                return {flag: false, point: []};
+                return { flag: false, point: [] };
             } else if (del === 0) {
                 // 有一个交点
                 res[0].x = - (2 * k * b - 2 * cir.x - 2 * cir.y * k) / (2 * (1 + k * k));
@@ -220,9 +220,9 @@ export class Intersect {
                 });
 
                 if (sa[0] <= res[0].x && res[0].x <= sa[1] && (cir.x - cir.r) <= res[0].x && res[0].x <= (cir.x + cir.r)) {
-                    return {flag: true, point: [{x: res[0].x, y: res[0].y}]};
+                    return { flag: true, point: [{ x: res[0].x, y: res[0].y }] };
                 } else {
-                    return {flag: false, point: []};
+                    return { flag: false, point: [] };
                 }
             } else if (del > 0) {
                 // 有两个交点
@@ -238,7 +238,7 @@ export class Intersect {
                     return v1 - v2;
                 });
 
-                let result = {flag: false, point: Array<{x: number, y: number}>()};
+                let result = { flag: false, point: Array<{x: number, y: number}>() };
                 if (sa[0] <= res[0].x && res[0].x <= sa[1] && (cir.x - cir.r) <= res[0].x && res[0].x <= (cir.x + cir.r)) {
                     result.flag = true;
                     result.point.push(res[0]);
@@ -251,7 +251,7 @@ export class Intersect {
                 return result;
             }
 
-        })([{x: seg.x, y: seg.y}, {x: x, y: y}], {x: cir.x, y: cir.y, r: cir.r});
+        })([{ x: seg.x, y: seg.y }, { x, y }], { x: cir.x, y: cir.y, r: cir.r });
 
         return cover;
     }
@@ -263,7 +263,7 @@ export class Intersect {
      */
     pointEach(pict: Tools, canvasData: CanvasData): void {
         let pointData: {flag: boolean, x: number, y: number};
-        let cirPoints: {flag: boolean, point: Array<{x: number, y: number}>};
+        let cirPoints: {flag: boolean, point: {x: number, y: number}[]};
 
         if (pict.flag === ToolsName.segment) {
             for (let data of (canvasData.getData() as Tools[])) {
@@ -271,14 +271,14 @@ export class Intersect {
                     // 线段与线段相交
                     pointData = this.segment((pict as InterSegment), (data as InterSegment));
                     if (pointData.flag) {
-                        this.saveData({x: pointData.x, y: pointData.y});
+                        this.saveData({ x: pointData.x, y: pointData.y });
                     }
                 } else if (data.flag === ToolsName.circular) {
                     // 线段与圆相交
                     cirPoints = this.circular((pict as InterSegment), (data as InterCircular));
                     if (cirPoints.flag) {
                         for (let item of cirPoints.point) {
-                            this.saveData({x: item.x, y: item.y});
+                            this.saveData({ x: item.x, y: item.y });
                         }
                     }
                 }
@@ -290,7 +290,7 @@ export class Intersect {
                     cirPoints = this.circular((data as InterSegment), (pict as InterCircular));
                     if (cirPoints.flag) {
                         for (let item of cirPoints.point) {
-                            this.saveData({x: item.x, y: item.y});
+                            this.saveData({ x: item.x, y: item.y });
                         }
                     }
                 }
@@ -324,7 +324,7 @@ export class Intersect {
                     if (data[j].flag === ToolsName.segment) {
                         let pointPosi = this.segment((data[i] as InterSegment), (data[j] as InterSegment));
                         if (pointPosi.flag) {
-                            this.saveData({x: pointPosi.x, y: pointPosi.y});
+                            this.saveData({ x: pointPosi.x, y: pointPosi.y });
                         }
                     } else if (data[j].flag === ToolsName.circular) {
                         let pointPosi = this.circular((data[i] as InterSegment), (data[j] as InterCircular));
@@ -366,7 +366,7 @@ export class Intersect {
     /**
      * 获取所有相交的点
      */
-    getData(): Array<{x: number, y: number}> {
+    getData(): {x: number, y: number}[] {
         return this.pointData;
     }
 

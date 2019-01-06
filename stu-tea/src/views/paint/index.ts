@@ -12,6 +12,7 @@ import $ from 'jquery'
 })
 export default class Paint extends Vue {
     private article: ArticleComp;
+    private canvas: MyCanvas;
 
     data () {
         return {
@@ -64,8 +65,8 @@ export default class Paint extends Vue {
     // 获取inforPanel的宽度和高度
     getInforWH (): { width: number, height: number } {
         return {
-            width: $('article.inforPanel').width(),
-            height: $('article.inforPanel').height()
+            width: $('aside.inforPanel').width(),
+            height: $('aside.inforPanel').height()
         };
     }
 
@@ -96,6 +97,7 @@ export default class Paint extends Vue {
             that.getArtHeig();
             that.structure();
             that.infoMaskVetical();
+            that.setPaintAttr();
         };
     }
 
@@ -110,13 +112,20 @@ export default class Paint extends Vue {
         $('article.toolPanel').css('height', (this.boxContent().height - assistHeight - 2) + 'px');
     }
 
+    // 设置画板的宽度和高度
+    setPaintAttr (): void {
+        let width = $('article.canvasPanel').width();
+        let height = $('article.canvasPanel').height();
+        $('#myCanvas').attr({ width, height });
+    }
+
     // 画板
     paint (): void {
-        let canvas = new MyCanvas();
-        canvas.startListen();
-        canvas.moveListen();
-        canvas.endListen();
-        canvas.clickListen();
+        this.canvas = new MyCanvas();
+        this.canvas.startListen();
+        this.canvas.moveListen();
+        this.canvas.endListen();
+        this.canvas.clickListen();
     }
 
     mounted () {
@@ -124,6 +133,7 @@ export default class Paint extends Vue {
         this.getArtHeig();  // 获取article高度
         this.structure();  // 设置结构
         this.infoMaskVetical();  // 设置inforMask的宽度和高度
+        this.setPaintAttr();  // // 设置画板的宽度和高度
         this.winChange();
         this.paint();
     }

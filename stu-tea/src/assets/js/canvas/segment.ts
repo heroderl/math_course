@@ -577,6 +577,6 @@ export class Segment implements InterSegment {
     private rotatexy(ox: number, oy: number, px: number, py: number, angle: number): {x: number, y: number} {
         let x = px * Math.cos(angle) + py * Math.sin(angle) + ox;
         let y = px * Math.sin(angle) - py * Math.cos(angle) + oy;
-        return {x: x, y: y};
+        return { x, y };
     }
 }

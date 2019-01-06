@@ -21,19 +21,19 @@ export class Rule {
     private myCanvas: CanvasRenderingContext2D;  // canvas对象
     private myCanvasNode: HTMLElement;  // canvas节点
     private rePaint: RePaint;  // 重绘图形
-    private AuxiliaryListen: AuxiliaryListen;  // 辅助工具
+    private auxiliaryListen: AuxiliaryListen;  // 辅助工具
     private canvasData: CanvasData;  // 存放数据
     private adsorption: Adsorption;  // 磁性吸附
     private intersect: Intersect;  // 相交
 
-    constructor(isMobild: boolean, myCanvas: CanvasRenderingContext2D, myCanvasNode: HTMLElement, rePaint: RePaint, AuxiliaryListen: AuxiliaryListen, canvasData: CanvasData, intersect: Intersect) {
+    constructor(isMobild: boolean, myCanvas: CanvasRenderingContext2D, myCanvasNode: HTMLElement, rePaint: RePaint, auxiliaryListen: AuxiliaryListen, canvasData: CanvasData, intersect: Intersect) {
         this.isMobild = isMobild;
         this.myCanvas = myCanvas;
         this.myCanvasNode = myCanvasNode;
         this.rePaint = rePaint;
         this.eventFlag = false;
         this.eventCount = 0;
-        this.AuxiliaryListen = AuxiliaryListen;
+        this.auxiliaryListen = auxiliaryListen;
         this.canvasData = canvasData;
         this.intersect = intersect;
         this.adsorption = new Adsorption(this.canvasData, this.intersect);
@@ -172,7 +172,7 @@ export class Rule {
      * 监听mouseomove事件
      */
     moveCallback(e: Event): void {
-        if (!!this.eventFlag && this.eventCount === 1) {
+        if (this.eventFlag && this.eventCount === 1) {
             // 画点
 
             let x = 0, y = 0;
@@ -293,7 +293,7 @@ export class Rule {
             this.myCanvas.fillStyle = Attribute.propDFStyle;
             this.myCanvas.fillText(value + 'cm', r / 2 - 22, -30);
             this.myCanvas.restore();
-        } else if (!!this.eventFlag && this.eventCount === 3) {
+        } else if (this.eventFlag && this.eventCount === 3) {
             // 画直线
 
             let x = 0, y = 0;
@@ -388,7 +388,7 @@ export class Rule {
      * 监听mouseend事件
      */
     endCallback(e: Event): void {
-        if (!!this.eventFlag && this.eventCount === 1) {
+        if (this.eventFlag && this.eventCount === 1) {
             // 确定点
             this.eventFlag = false;
             this.eventCount = 2;
@@ -423,7 +423,7 @@ export class Rule {
             this.myCanvas.arc(this.x, this.y, Attribute.propPointR, 0, 2 * Math.PI, false);
             this.myCanvas.fillStyle = Attribute.propDFStyle;
             this.myCanvas.fill();
-        } else if (!!this.eventFlag && this.eventCount === 3) {
+        } else if (this.eventFlag && this.eventCount === 3) {
             // 确定直线
             this.eventFlag = false;
             this.eventCount = 0;
@@ -515,7 +515,7 @@ export class Rule {
             this.myCanvas.restore();
 
             // 恢复辅助按钮标志
-            this.AuxiliaryListen.recoverButtonFlag();
+            this.auxiliaryListen.recoverButtonFlag();
         }
     }
 
@@ -529,7 +529,7 @@ export class Rule {
     private rangePoints(x: number, y: number, offset: number, angle: number): {x: number, y: number} {
         let ax = x * Math.pow(Math.cos(angle), 2) + x * Math.pow(Math.sin(angle), 2) + offset * Math.sin(angle);
         let ay = y * Math.pow(Math.cos(angle), 2) + y * Math.pow(Math.sin(angle), 2) + offset * Math.cos(angle);
-        return {x: ax, y: ay};
+        return { x: ax, y: ay };
     }
 
     /**
@@ -543,6 +543,6 @@ export class Rule {
     private rotatexy(ox: number, oy: number, px: number, py: number, angle: number): {x: number, y: number} {
         let x = px * Math.cos(angle) + py * Math.sin(angle) + ox;
         let y = px * Math.sin(angle) - py * Math.cos(angle) + oy;
-        return {x: x, y: y};
+        return { x, y };
     }
 }

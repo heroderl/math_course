@@ -7,9 +7,9 @@ import { Tools, InterPoint, InterSegment, InterFan, InterCircular, InterRadius, 
 export class RePaint {
     private myCanvas: CanvasRenderingContext2D;  // 表示canvas对象
     private myCanvasNode: HTMLElement;  // canvas节点
-    private data: Array<Tools>;  // 存放canvas图形数据
+    private data: Tools[];  // 存放canvas图形数据
 
-    constructor(myCanvas: CanvasRenderingContext2D, myCanvasNode: HTMLElement, data: Array<Tools>) {
+    constructor(myCanvas: CanvasRenderingContext2D, myCanvasNode: HTMLElement, data: Tools[]) {
         this.myCanvas = myCanvas;
         this.myCanvasNode = myCanvasNode;
         this.data = data;
@@ -22,7 +22,7 @@ export class RePaint {
      */
     private paintPoint(data: InterPoint) {
         this.myCanvas.beginPath();
-        if (!!data.isChoosed) {
+        if (data.isChoosed) {
             this.myCanvas.fillStyle = Attribute.propisChoosed;
         } else {
             this.myCanvas.fillStyle = Attribute.propDFStyle;
@@ -47,7 +47,7 @@ export class RePaint {
 
         // 画线段
         this.myCanvas.beginPath();
-        if (!!data.isChoosed) {
+        if (data.isChoosed) {
             this.myCanvas.strokeStyle = Attribute.propisChoosed;
             this.myCanvas.fillStyle = Attribute.propisChoosed;
         } else {
@@ -82,7 +82,7 @@ export class RePaint {
         data.anticlockwise = (!!data.anticlockwise) ? data.anticlockwise : false;
 
         this.myCanvas.beginPath();
-        if (!!data.isChoosed) {
+        if (data.isChoosed) {
             this.myCanvas.strokeStyle = Attribute.propisChoosed;
         } else {
             this.myCanvas.strokeStyle = Attribute.propDSStyle;
@@ -109,7 +109,7 @@ export class RePaint {
 
         // 圆
         this.myCanvas.beginPath();
-        if (!!data.isChoosed) {
+        if (data.isChoosed) {
             this.myCanvas.strokeStyle = Attribute.propisChoosed;
         } else {
             this.myCanvas.strokeStyle = Attribute.propDSStyle;
@@ -121,7 +121,7 @@ export class RePaint {
         this.myCanvas.stroke();
         // 圆心
         this.myCanvas.beginPath();
-        if (!!data.isChoosed) {
+        if (data.isChoosed) {
             this.myCanvas.fillStyle = Attribute.propisChoosed;
         } else {
             this.myCanvas.fillStyle = Attribute.propDFStyle;
@@ -142,7 +142,7 @@ export class RePaint {
         data.anticlockwise = (!!data.anticlockwise) ? data.anticlockwise : false;
 
         this.myCanvas.beginPath();
-        if (!!data.isChoosed) {
+        if (data.isChoosed) {
             this.myCanvas.strokeStyle = Attribute.propisChoosed;
         } else {
             this.myCanvas.strokeStyle = Attribute.propDSStyle;
@@ -166,7 +166,7 @@ export class RePaint {
         data.anticlockwise = (!!data.anticlockwise) ? data.anticlockwise : false;
 
         this.myCanvas.beginPath();
-        if (!!data.isChoosed) {
+        if (data.isChoosed) {
             this.myCanvas.strokeStyle = Attribute.propisChoosed;
         } else {
             this.myCanvas.strokeStyle = Attribute.propDSStyle;
@@ -190,7 +190,7 @@ export class RePaint {
      */
     private paintChord(data: InterChord) {
         this.myCanvas.beginPath();
-        if (!!data.isChoosed) {
+        if (data.isChoosed) {
             this.myCanvas.strokeStyle = Attribute.propisChoosed;
             this.myCanvas.fillStyle = Attribute.propisChoosed;
         } else {
@@ -225,7 +225,7 @@ export class RePaint {
     private paintLetterFlag(data: InterLetterFlag) {
         this.myCanvas.beginPath();
         this.myCanvas.font = Attribute.propFont;
-        if (!!data.isChoosed) {
+        if (data.isChoosed) {
             this.myCanvas.fillStyle = Attribute.propisChoosed;
         } else {
             this.myCanvas.fillStyle = Attribute.propDFStyle;
@@ -239,41 +239,41 @@ export class RePaint {
     rePaint(): void {
         for (let value of this.data) {
             switch (value.flag) {
-                case ToolsName.point:
-                    this.paintPoint((value as InterPoint));
-                    break;
-                case ToolsName.segment:
-                    this.paintSegment((value as InterSegment));
-                    break;
-                case ToolsName.circular:
-                    this.paintCircular((value as InterCircular));
-                    for (let value2 of (value as InterCircular).fanAndRadius) {
-                        switch (value2.flag) {
-                            case ToolsName.fan:
-                                this.paintFan((value2 as InterFan));
+            case ToolsName.point:
+                this.paintPoint((value as InterPoint));
+                break;
+            case ToolsName.segment:
+                this.paintSegment((value as InterSegment));
+                break;
+            case ToolsName.circular:
+                this.paintCircular((value as InterCircular));
+                for (let value2 of (value as InterCircular).fanAndRadius) {
+                    switch (value2.flag) {
+                    case ToolsName.fan:
+                        this.paintFan((value2 as InterFan));
 
-                                let temp = (value2 as InterFan).hasChord;
-                                if (temp.isShow) {
-                                    this.paintChord(temp);
-                                }
-                                break;
-                            case ToolsName.radius:
-                                this.paintRadius((value2 as InterRadius));
-                                break;
-                            case ToolsName.diameter:
-                                this.paintDiameter((value2 as InterDiameter));
-                                break;
-                            default: break;
+                        let temp = (value2 as InterFan).hasChord;
+                        if (temp.isShow) {
+                            this.paintChord(temp);
                         }
+                        break;
+                    case ToolsName.radius:
+                        this.paintRadius((value2 as InterRadius));
+                        break;
+                    case ToolsName.diameter:
+                        this.paintDiameter((value2 as InterDiameter));
+                        break;
+                    default: break;
                     }
-                    break;
-                case ToolsName.tangent:
-                    this.paintTangent();
-                    break;
-                case ToolsName.letterFlag:
-                    this.paintLetterFlag(value as InterLetterFlag);
-                    break;
-                default: break;
+                }
+                break;
+            case ToolsName.tangent:
+                this.paintTangent();
+                break;
+            case ToolsName.letterFlag:
+                this.paintLetterFlag(value as InterLetterFlag);
+                break;
+            default: break;
             }
         }
     }

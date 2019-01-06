@@ -20,7 +20,7 @@ export class AuxiliaryListen {
     private textBox: TextBox;  // 文本框输入值
     private intersect: Intersect;  // 相交
 
-    constructor(eventClick: string, canvasChoosed: CanvasChoosed, canvasData: CanvasData, rePaint: RePaint, intersect: Intersect) {
+    constructor (eventClick: string, canvasChoosed: CanvasChoosed, canvasData: CanvasData, rePaint: RePaint, intersect: Intersect) {
         this.eventClick = eventClick;
         this.canvasChoosed = canvasChoosed;
         this.canvasData = canvasData;
@@ -39,7 +39,7 @@ export class AuxiliaryListen {
     /**
      * 引入其他标志
      */
-    init(buttonListen: ButtonListen, textBox: TextBox): void {
+    init (buttonListen: ButtonListen, textBox: TextBox): void {
         this.buttonListen = buttonListen;
         this.textBox = textBox;
     }
@@ -47,9 +47,9 @@ export class AuxiliaryListen {
     /**
      * 按钮监听模板
      */
-    private btnListen(id: string, callback: Function): void {
+    private btnListen (id: string, callback: Function): void {
         let that = this;
-        document.getElementById(id).addEventListener(that.eventClick, function(e) {
+        document.getElementById(id).addEventListener(that.eventClick, function (e) {
             e = e || window.event;
 
             // 防止按钮多按
@@ -57,7 +57,7 @@ export class AuxiliaryListen {
             // 如果点了工具按钮，则不能使用辅助工具了
             if (that.buttonListen.getButtonFlag() !== ToolsName.default) return;
             // 如果点了文本框，则不能使用辅助工具了
-            if (!!that.textBox.getTextFlag()) return;
+            if (that.textBox.getTextFlag()) return;
 
             callback.call(that, e);
         }, false);
@@ -66,8 +66,8 @@ export class AuxiliaryListen {
     /**
      * 标志
      */
-    private buttonFlag(): void {
-        this.btnListen(Attribute.btnLetFlagID, function(e: Event) {
+    private buttonFlag (): void {
+        this.btnListen(Attribute.btnLetFlagID, function (e: Event) {
             this.auxiliaryFlag = Auxiliary.flag;
             e.srcElement.className = 'choosed';
 
@@ -85,8 +85,8 @@ export class AuxiliaryListen {
     /**
      * 橡皮檫
      */
-    private buttonRubber(): void {
-        this.btnListen(Attribute.btnRubberID, function(e: Event) {
+    private buttonRubber (): void {
+        this.btnListen(Attribute.btnRubberID, function (e: Event) {
             let index = this.canvasChoosed.getIndex();
             if (index.length === 0) return;
             this.canvasData.delData(index);
@@ -108,8 +108,8 @@ export class AuxiliaryListen {
     /**
      * 尺子
      */
-    private buttonRule(): void {
-        this.btnListen(Attribute.btnRuleID, function(e: Event) {
+    private buttonRule (): void {
+        this.btnListen(Attribute.btnRuleID, function (e: Event) {
             this.auxiliaryFlag = Auxiliary.rule;
             document.getElementById(Attribute.btnRuleID).className = 'choosed';
 
@@ -127,8 +127,8 @@ export class AuxiliaryListen {
     /**
      * 量角器
      */
-    private buttonProtractor(): void {
-        this.btnListen(Attribute.btnProtractorID, function(e: Event) {
+    private buttonProtractor (): void {
+        this.btnListen(Attribute.btnProtractorID, function (e: Event) {
             this.auxiliaryFlag = Auxiliary.protractor;
             e.srcElement.className = 'choosed';
 
@@ -146,8 +146,8 @@ export class AuxiliaryListen {
     /**
      * 旋转
      */
-    private buttonRotate(): void {
-        this.btnListen(Attribute.btnRotateID, function(e: Event) {
+    private buttonRotate (): void {
+        this.btnListen(Attribute.btnRotateID, function (e: Event) {
             // 必须先选中扇形或半径
             let index = this.canvasChoosed.getIndex();
             if (index.length === 1 && (this.canvasData.getData(index[0]) as Tools).flag === ToolsName.segment) {
@@ -175,8 +175,8 @@ export class AuxiliaryListen {
     /**
      * 撤销
      */
-    private buttonCancle(): void {
-        this.btnListen(Attribute.btnCancleID, function(e: Event) {
+    private buttonCancle (): void {
+        this.btnListen(Attribute.btnCancleID, function (e: Event) {
             // 清除图形的选中
             this.canvasChoosed.cancleSelected();
             this.canvasChoosed.recoverIndex();
@@ -189,7 +189,7 @@ export class AuxiliaryListen {
                     let cir = (data as InterCircular).fanAndRadius;
                     if (cir.length !== 0) {
                         let tempsFan = cir[cir.length - 1];
-                        if (tempsFan.flag === ToolsName.fan && !!(tempsFan as InterFan).hasChord.isShow) {
+                        if (tempsFan.flag === ToolsName.fan && (tempsFan as InterFan).hasChord.isShow) {
                             this.canvasData.delData([length - 1, cir.length - 1, -1]);
                         } else {
                             this.canvasData.delData([length - 1, cir.length - 1]);
@@ -218,19 +218,19 @@ export class AuxiliaryListen {
     /**
      * 获取辅助工具标志
      */
-    getButtonFlag(): Auxiliary {
+    getButtonFlag (): Auxiliary {
         return this.auxiliaryFlag;
     }
 
     /**
      * 恢复辅助工具标志
      */
-    recoverButtonFlag(): void {
+    recoverButtonFlag (): void {
         this.auxiliaryFlag = Auxiliary.default;
 
         let arr = [Attribute.btnLetFlagID, Attribute.btnRubberID, Attribute.btnRuleID, Attribute.btnProtractorID, Attribute.btnRotateID, Attribute.btnCancleID];
 
-        arr.forEach(function(item: Attribute) {
+        arr.forEach(function (item: Attribute) {
             document.getElementById(item.toString()).className = 'nochoosed';
         });
     }

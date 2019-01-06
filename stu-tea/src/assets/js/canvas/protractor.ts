@@ -26,19 +26,19 @@ export class Protractor {
     private myCanvas: CanvasRenderingContext2D;  // canvas对象
     private myCanvasNode: HTMLElement;  // canvas节点
     private rePaint: RePaint;  // 重绘图形
-    private AuxiliaryListen: AuxiliaryListen;  // 辅助工具
+    private auxiliaryListen: AuxiliaryListen;  // 辅助工具
     private canvasData: CanvasData;  // 存放数据
     private adsorption: Adsorption;  // 磁性吸附
     private intersect: Intersect;  // 相交
 
-    constructor(isMobild: boolean, myCanvas: CanvasRenderingContext2D, myCanvasNode: HTMLElement, rePaint: RePaint, AuxiliaryListen: AuxiliaryListen, canvasData: CanvasData, intersect: Intersect) {
+    constructor(isMobild: boolean, myCanvas: CanvasRenderingContext2D, myCanvasNode: HTMLElement, rePaint: RePaint, auxiliaryListen: AuxiliaryListen, canvasData: CanvasData, intersect: Intersect) {
         this.isMobild = isMobild;
         this.myCanvas = myCanvas;
         this.myCanvasNode = myCanvasNode;
         this.rePaint = rePaint;
         this.eventFlag = false;
         this.eventCount = 0;
-        this.AuxiliaryListen = AuxiliaryListen;
+        this.auxiliaryListen = auxiliaryListen;
         this.canvasData = canvasData;
         this.intersect = intersect;
         this.adsorption = new Adsorption(this.canvasData, this.intersect);
@@ -212,7 +212,7 @@ export class Protractor {
      * 监听mouseomove事件
      */
     moveCallback(e: Event): void {
-        if (!!this.eventFlag && this.eventCount === 1) {
+        if (this.eventFlag && this.eventCount === 1) {
             // 画点
 
             let x = 0, y = 0;
@@ -288,7 +288,7 @@ export class Protractor {
             this.myCanvas.moveTo(this.x, this.y);
             this.myCanvas.arc(this.x, this.y, r, angle, angle, false);
             this.myCanvas.stroke();
-        } else if (!!this.eventFlag && this.eventCount === 3) {
+        } else if (this.eventFlag && this.eventCount === 3) {
             // 画半径1
 
             let x = 0, y = 0;
@@ -408,7 +408,7 @@ export class Protractor {
             this.myCanvas.textAlign = Attribute.propTextAlign;
             this.myCanvas.fillStyle = Attribute.propDFStyle;
             this.myCanvas.fillText(value + '°', px + 22, py + 22);
-        } else if (!!this.eventFlag && this.eventCount === 4) {
+        } else if (this.eventFlag && this.eventCount === 4) {
             // 画半径2
 
             let x = 0, y = 0;
@@ -493,7 +493,7 @@ export class Protractor {
      * 监听mouseend事件
      */
     endCallback(e: Event): void {
-        if (!!this.eventFlag && this.eventCount === 1) {
+        if (this.eventFlag && this.eventCount === 1) {
             // 确定点
             this.eventFlag = false;
             this.eventCount = 2;
@@ -528,7 +528,7 @@ export class Protractor {
             this.myCanvas.fillStyle = Attribute.propDFStyle;
             this.myCanvas.arc(this.x, this.y, Attribute.propPointR, 0, 2 * Math.PI, false);
             this.myCanvas.fill();
-        } else if (!!this.eventFlag && this.eventCount === 3) {
+        } else if (this.eventFlag && this.eventCount === 3) {
             // 确定半径1
             this.eventFlag = false;
 
@@ -571,7 +571,7 @@ export class Protractor {
             this.myCanvas.moveTo(this.x, this.y);
             this.myCanvas.arc(this.x, this.y, this.r, this.startAngle, this.startAngle, false);
             this.myCanvas.stroke();
-        } else if (!!this.eventFlag && this.eventCount === 4) {
+        } else if (this.eventFlag && this.eventCount === 4) {
             // 确定半径2，保存数据
             this.eventFlag = false;
             this.eventCount = 0;
@@ -653,7 +653,7 @@ export class Protractor {
             this.myCanvas.fillText(value + '°', px + 22, py + 22);
 
             // 恢复辅助按钮标志
-            this.AuxiliaryListen.recoverButtonFlag();
+            this.auxiliaryListen.recoverButtonFlag();
         }
     }
 }

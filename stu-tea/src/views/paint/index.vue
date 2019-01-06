@@ -50,7 +50,7 @@
                         </div>
                     </div>
                 </article>
-                <article class="inforPanel" v-show="infoFlag">
+                <aside class="inforPanel" v-show="infoFlag">
                     <div class="inforMask">
                         <h1>操作提示</h1>
                         <ul>
@@ -66,7 +66,8 @@
                         </ul>
                         <button @click="isShowMask()">跳过</button>
                     </div>
-                </article>
+                </aside>
+                <input type="text" id="inputFlag" class="hidden" placeholder="請輸入字母">
             </div>
         </article>
     </section>

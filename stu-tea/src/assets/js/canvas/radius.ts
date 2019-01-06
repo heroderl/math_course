@@ -144,7 +144,7 @@ export class Radius implements InterRadius {
             this.myCanvas.arc(this.x, this.y, this.r, angle, angle, this.anticlockwise);
             this.myCanvas.closePath();
             this.myCanvas.stroke();
-        } else if (!!this.eventFlag && this.eventCount === 1) {
+        } else if (this.eventFlag && this.eventCount === 1) {
             // 画半径
 
             let x = 0, y = 0;
@@ -192,7 +192,7 @@ export class Radius implements InterRadius {
      * @param: e Event事件
      */
     endCallBack(e: Event): void {
-        if (!!this.eventFlag && this.eventCount === 1) {
+        if (this.eventFlag && this.eventCount === 1) {
             // 确定半径，保存数据
             this.eventFlag = false;
             this.eventCount = 0;

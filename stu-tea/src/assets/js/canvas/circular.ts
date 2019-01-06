@@ -21,7 +21,7 @@ export class Circular implements InterCircular {
     isChoosed: boolean;  // true表示图形被选中，false表示未被选中
     anticlockwise?: boolean;  // false表示顺时针(默认)，true表示逆时针
     fillStyle: string;  // 填充的颜色
-    fanAndRadius: Array<Tools>;  // 存放依赖于圆的扇形和半径
+    fanAndRadius: Tools[];  // 存放依赖于圆的扇形和半径
 
     private isMobild: boolean;  // true为移动端，false为PC端
     private myCanvas: CanvasRenderingContext2D;  // canvas对象
@@ -34,7 +34,7 @@ export class Circular implements InterCircular {
     private adsorption: Adsorption;  // 磁性吸附
     private intersect: Intersect;  // 相交
 
-    constructor(isMobild: boolean, myCanvas: CanvasRenderingContext2D, myCanvasNode: HTMLElement, rePaint: RePaint, buttonListen: ButtonListen, canvasData: CanvasData, intersect: Intersect) {
+    constructor (isMobild: boolean, myCanvas: CanvasRenderingContext2D, myCanvasNode: HTMLElement, rePaint: RePaint, buttonListen: ButtonListen, canvasData: CanvasData, intersect: Intersect) {
         this.flag = ToolsName.circular;
         this.isMobild = isMobild;
         this.myCanvas = myCanvas;
@@ -57,13 +57,14 @@ export class Circular implements InterCircular {
      * @param: e Event事件
      * @returns void
      */
-    startCallBack(e: Event): void {
+    startCallBack (e: Event): void {
         if (!this.eventFlag && this.eventCount === 0) {
             // 画圆点
             this.eventFlag = true;
             this.eventCount = 1;
             this.fanAndRadius = [];
 
+            // tslint:disable-next-line:one-variable-per-declaration
             let x = 0, y = 0;
             if (this.isMobild) {
                 // 移动端
@@ -97,6 +98,7 @@ export class Circular implements InterCircular {
             // 画圆，画半径
             this.eventFlag = true;
 
+            // tslint:disable-next-line:one-variable-per-declaration
             let x = 0, y = 0;
             if (this.isMobild) {
                 // 移动端
@@ -199,7 +201,7 @@ export class Circular implements InterCircular {
      * @param: e 事件
      * @returns void
      */
-    moveCallBack(e: Event): void {
+    moveCallBack (e: Event): void {
         if (this.eventFlag && this.eventCount === 1) {
             // 画圆点
 
@@ -434,7 +436,7 @@ export class Circular implements InterCircular {
      * @param: e 事件
      * @returns void
      */
-    endCallBack(e: Event): void {
+    endCallBack (e: Event): void {
         if (this.eventFlag && this.eventCount === 1) {
             // 确定圆点
             this.eventFlag = false;
@@ -541,7 +543,7 @@ export class Circular implements InterCircular {
      * 返回坐标数据
      * @returns InterCircular
      */
-    data(): InterCircular {
+    data (): InterCircular {
         return { flag: this.flag, isChoosed: this.isChoosed, x: this.x, y: this.y, r: this.r, anticlockwise: this.anticlockwise, fillStyle: this.fillStyle, fanAndRadius: this.fanAndRadius };
     }
 
@@ -553,9 +555,9 @@ export class Circular implements InterCircular {
      * @param py 所求点的y坐标，同上，x坐标向上为正，向下为负
      * @param angle 角度，顺时针
      */
-    private rotatexy(ox: number, oy: number, px: number, py: number, angle: number): {x: number, y: number} {
+    private rotatexy (ox: number, oy: number, px: number, py: number, angle: number): {x: number, y: number} {
         let x = px * Math.cos(angle) + py * Math.sin(angle) + ox;
         let y = px * Math.sin(angle) - py * Math.cos(angle) + oy;
-        return {x: x, y: y};
+        return { x, y };
     }
 }

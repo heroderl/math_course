@@ -204,7 +204,8 @@ article.toolPanel {
     margin-bottom: 20px;
 }
 /* 介绍信息 */
-article.inforPanel {
+aside.inforPanel {
+    display: block;
     position: absolute;
     top: 0px;
     left: 0px;
@@ -250,4 +251,25 @@ article.inforPanel {
     background-size: 100% 100%;
     margin-top: 15px;
     line-height: 52.5px;
+}
+/* 弹出文本框，输入点的字母标志 */
+#inputFlag {
+    background-color: white;
+    border: 2px solid green;
+    color: black;
+    font-size: 20px;
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#inputFlag.hidden {
+    display: none;
+}
+#inputFlag.show {
+    display: block;
 }

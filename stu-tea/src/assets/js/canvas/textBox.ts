@@ -1,11 +1,10 @@
-import { ToolsName, Auxiliary } from './enum/enum-configlib';
+import { ToolsName, Auxiliary, Attribute } from './enum/enum-configlib';
 import { Tools, InterCircular, InterSegment, InterFan, InterRadius, InterDiameter } from './interface/inter-toolslib';
 import { CanvasChoosed } from './canvasChoosed';
 import { CanvasData } from './canvasData';
 import { RePaint } from './rePaint';
 import { AuxiliaryListen } from './auxiliaryListen';
 import { ButtonListen } from './buttonListen';
-import { Attribute } from './enum/enum-configlib';
 import { Intersect } from './intersect';
 
 /**
@@ -19,7 +18,7 @@ export class TextBox {
     private auxiliaryListen: AuxiliaryListen;  // 辅助工具
     private buttonListen: ButtonListen;  // 工具
     private oldtext: string;  // 旧文本值
-    private index: Array<number>;  // 选中图形的索引
+    private index: number[];  // 选中图形的索引
     private intersect: Intersect;  // 相交
 
     constructor (canvasChoosed: CanvasChoosed, canvasData: CanvasData, rePaint: RePaint, intersect: Intersect) {
@@ -148,7 +147,7 @@ export class TextBox {
                 switch (data.flag) {
                 case ToolsName.fan:
                         // 扇形
-                    if (inputNode.value.length === 0 || parseInt(inputNode.value) === 0) {
+                    if (inputNode.value.length === 0 || parseInt(inputNode.value, 10) === 0) {
                         inputNode.value = '1';
                     }
                     if (data.startAngle <= data.endAngle) {

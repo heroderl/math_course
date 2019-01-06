@@ -234,7 +234,7 @@ export class Fan implements InterFan {
             this.myCanvas.arc(this.x, this.y, this.r, angle, angle, this.anticlockwise);
             this.myCanvas.stroke();
             this.myCanvas.closePath();
-        } else if (!!this.eventFlag && this.eventCount === 1) {
+        } else if (this.eventFlag && this.eventCount === 1) {
             // 画半径1
             let x = 0, y = 0;
             if (this.isMobild) {
@@ -352,7 +352,7 @@ export class Fan implements InterFan {
             this.myCanvas.textAlign = 'center';
             this.myCanvas.fillStyle = 'black';
             this.myCanvas.fillText(value + '°', px + 22, py + 22);
-        } else if (!!this.eventFlag && this.eventCount === 3) {
+        } else if (this.eventFlag && this.eventCount === 3) {
             // 画半径2
 
             let x = 0, y = 0;
@@ -439,7 +439,7 @@ export class Fan implements InterFan {
      * @param: e Event事件
      */
     endCallBack(e: Event): void {
-        if (!!this.eventFlag && this.eventCount === 1) {
+        if (this.eventFlag && this.eventCount === 1) {
             // 确定半径1
             this.eventFlag = false;
             this.eventCount = 2;
@@ -484,7 +484,7 @@ export class Fan implements InterFan {
             this.myCanvas.arc(this.x, this.y, this.r, this.startAngle, this.startAngle, this.anticlockwise);
             this.myCanvas.stroke();
             this.myCanvas.closePath();
-        } else if (!!this.eventFlag && this.eventCount === 3) {
+        } else if (this.eventFlag && this.eventCount === 3) {
             // 确定半径2，保存数据
             this.eventFlag = false;
             this.eventCount = 0;

@@ -17,10 +17,10 @@ export class LetterFlag implements InterLetterFlag {
     private isMobild: boolean;  // true为移动端，false为PC端
     private myCanvas: CanvasRenderingContext2D;  // canvas对象
     private myCanvasNode: HTMLElement;  // canvas节点
-    private AuxiliaryListen: AuxiliaryListen;  // 辅助工具
+    private auxiliaryListen: AuxiliaryListen;  // 辅助工具
     private canvasData: CanvasData;
 
-    constructor(isMobild: boolean, myCanvas: CanvasRenderingContext2D, myCanvasNode: HTMLElement, AuxiliaryListen: AuxiliaryListen, canvasData: CanvasData) {
+    constructor(isMobild: boolean, myCanvas: CanvasRenderingContext2D, myCanvasNode: HTMLElement, auxiliaryListen: AuxiliaryListen, canvasData: CanvasData) {
         this.flag = ToolsName.letterFlag;
         this.isChoosed = false;
         this.eventFlag = false;
@@ -28,7 +28,7 @@ export class LetterFlag implements InterLetterFlag {
         this.isMobild = isMobild;
         this.myCanvas = myCanvas;
         this.myCanvasNode = myCanvasNode;
-        this.AuxiliaryListen = AuxiliaryListen;
+        this.auxiliaryListen = auxiliaryListen;
         this.canvasData = canvasData;
 
         this.inputListen();
@@ -74,7 +74,7 @@ export class LetterFlag implements InterLetterFlag {
      * 监听mousemove事件
      */
     moveCallback(e: Event): void {
-        if (!!this.eventFlag && this.eventCount === 1) {
+        if (this.eventFlag && this.eventCount === 1) {
             // 不动
         }
     }
@@ -83,13 +83,13 @@ export class LetterFlag implements InterLetterFlag {
      * 监听mouseup事件
      */
     endCallback(e: Event): void {
-        if (!!this.eventFlag && this.eventCount === 1) {
+        if (this.eventFlag && this.eventCount === 1) {
             // 保存文本的坐标数据，在文本框失去焦点时才保存数据
             this.eventFlag = false;
             this.eventCount = 0;
 
             // 恢复辅助按钮标志
-            this.AuxiliaryListen.recoverButtonFlag();
+            this.auxiliaryListen.recoverButtonFlag();
 
             // 文本框获得焦点
             setTimeout(function() {
@@ -102,7 +102,7 @@ export class LetterFlag implements InterLetterFlag {
      * 文本的监听
      */
     private inputListen(): void {
-        var that = this;
+        let that = this;
         document.getElementById(Attribute.btnInputFlagID).addEventListener('input', function(e) {
             let inputNode = (document.getElementById(e.srcElement.id) as HTMLInputElement);
             inputNode.value = inputNode.value.replace(/[^a-z]/gi, '');
@@ -116,7 +116,7 @@ export class LetterFlag implements InterLetterFlag {
      * 监听focus事件，获取焦点
      */
     private focusListen(): void {
-        var that = this;
+        let that = this;
         document.getElementById(Attribute.btnInputFlagID).addEventListener('focus', function(e) {
             (document.getElementById(e.srcElement.id) as HTMLInputElement).value = '';
         }, false);
@@ -126,7 +126,7 @@ export class LetterFlag implements InterLetterFlag {
      * 监听blue事件，失去焦点
      */
     private blurListen(): void {
-        var that = this;
+        let that = this;
         document.getElementById(Attribute.btnInputFlagID).addEventListener('blur', function(e) {
             let inputNode = (document.getElementById(e.srcElement.id) as HTMLInputElement);
             if (inputNode.value.length === 0) {
@@ -148,6 +148,6 @@ export class LetterFlag implements InterLetterFlag {
      * 返回坐标数据
      */
     data(): InterLetterFlag {
-        return {flag: this.flag, isChoosed: this.isChoosed, x: this.x, y: this.y, text: this.text};
+        return { flag: this.flag, isChoosed: this.isChoosed, x: this.x, y: this.y, text: this.text };
     }
 }

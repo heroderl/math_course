@@ -63,7 +63,7 @@ export class MoveGraph {
      * @return true表示图形移动过，不再执行click；false表示未移动，照常执行click
      */
     end(e: Event): boolean {
-        if (!!this.moveFlag) {
+        if (this.moveFlag) {
             this.startFlag = false;
             this.moveFlag = false;
 
