@@ -1,0 +1,11 @@
+article {
+    position: relative;
+    background-image: url(../../../static/image/beijing2.png);
+    background-size: 100% 100%;
+    background-color: rgba(0, 151, 30, 0.2);
+    width: 100%;
+}
+
+ul {
+    position: relative;
+}

@@ -53,11 +53,6 @@
 						alert("请先登录！");
 						window.location.href = "adminLogin.html";
 					}
-					if( phpid == undefined )
-					{
-						alert("请先登录！");
-						window.location.href = "adminLogin.html";
-					}
 					$.ajax({
 						type: "post",
 						url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "studentImage/image/",

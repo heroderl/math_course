@@ -7,7 +7,7 @@
 function config() {
     return array(
         'type'          => 'mysql',     // 数据库类型
-        'host'          => '192.168.1.192', // 服务器地址
+        'host'          => 'localhost', // 服务器地址
         'database'      => 'math',   // 数据库名
         'port'          => '3309',      // 端口号
         'username'      => 'root',      // 数据库用户名

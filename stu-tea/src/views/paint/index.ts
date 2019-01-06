@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { Component, Watch } from 'vue-property-decorator'
 import MathHeader from '@/components/math-header/math-header.vue'
 import ArticleComp from '../../assets/js/articleComp'
+import MyCanvas from '../../assets/js/canvas/myCanvas'
 import $ from 'jquery'
 
 @Component({
@@ -11,6 +12,7 @@ import $ from 'jquery'
 })
 export default class Paint extends Vue {
     private article: ArticleComp;
+    private canvas: MyCanvas;
 
     data () {
         return {
@@ -20,8 +22,27 @@ export default class Paint extends Vue {
                 btnName: '返回'
             },
             articleHeight: 0,
-            inforPanel: 0
+            infoFlag: false
         }
+    }
+
+    // 设置inforMask的宽度和高度
+    @Watch('infoFlag')
+    infoMaskVetical () {
+        this.$nextTick(function () {
+            let inforAttr = this.getInforWH();
+            let maskAttr = this.getMaskWH();
+            let top = (inforAttr.height - maskAttr.height) / 2;
+            let left = (inforAttr.width - maskAttr.width) / 2;
+
+            top = top < 0 ? 0 : top;
+            left = left < 0 ? 0 : left;
+
+            $('.inforMask').css({
+                'top': top + 'px',
+                'left': left + 'px'
+            });
+        });
     }
 
     // 设置article标签的高度
@@ -44,8 +65,8 @@ export default class Paint extends Vue {
     // 获取inforPanel的宽度和高度
     getInforWH (): { width: number, height: number } {
         return {
-            width: $('article.inforPanel').width(),
-            height: $('article.inforPanel').height()
+            width: $('aside.inforPanel').width(),
+            height: $('aside.inforPanel').height()
         };
     }
 
@@ -57,20 +78,15 @@ export default class Paint extends Vue {
         };
     }
 
-    // 设置infoMask垂直居中
-    infoMaskVetical (): void {
-        let inforAttr = this.getInforWH();
-        let maskAttr = this.getMaskWH();
-        let top = (inforAttr.height - maskAttr.height) / 2;
-        let left = (inforAttr.width - maskAttr.width) / 2;
-
-        top = top < 0 ? 0 : top;
-        left = left < 0 ? 0 : left;
-
-        $('.inforMask').css({
-            'top': top + 'px',
-            'left': left + 'px'
-        })
+    // 设置inforMask的显示或隐藏
+    isShowMask () {
+        if (this.$data.infoFlag) {
+            // 隐藏
+            this.$data.infoFlag = false;
+        } else {
+            // 显示
+            this.$data.infoFlag = true;
+        }
     }
 
     // 当窗口改变时，article标签的高度也随着改变
@@ -81,6 +97,7 @@ export default class Paint extends Vue {
             that.getArtHeig();
             that.structure();
             that.infoMaskVetical();
+            that.setPaintAttr();
         };
     }
 
@@ -95,11 +112,29 @@ export default class Paint extends Vue {
         $('article.toolPanel').css('height', (this.boxContent().height - assistHeight - 2) + 'px');
     }
 
+    // 设置画板的宽度和高度
+    setPaintAttr (): void {
+        let width = $('article.canvasPanel').width();
+        let height = $('article.canvasPanel').height();
+        $('#myCanvas').attr({ width, height });
+    }
+
+    // 画板
+    paint (): void {
+        this.canvas = new MyCanvas();
+        this.canvas.startListen();
+        this.canvas.moveListen();
+        this.canvas.endListen();
+        this.canvas.clickListen();
+    }
+
     mounted () {
         this.setArticle();  // 设置article高度
         this.getArtHeig();  // 获取article高度
         this.structure();  // 设置结构
-        this.infoMaskVetical();  // 设置infoMask水平和垂直居中
+        this.infoMaskVetical();  // 设置inforMask的宽度和高度
+        this.setPaintAttr();  // // 设置画板的宽度和高度
         this.winChange();
+        this.paint();
     }
 }

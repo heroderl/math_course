@@ -1,0 +1,77 @@
+<html>
+<head>
+    <title>画板</title>
+    <style>
+        html, body, h1, ul, li{margin: 0; padding: 0; -moz-user-select: none; -khtml-user-select: none; user-select: none;}
+        ul, li{list-style: none;}
+        h1{text-align: center;}
+        #box{width: 974px;}
+        button{outline: none; cursor: pointer; margin: 0; padding: 0;}
+        .canvasTools{float: left; width: 870px; height: 800px; touch-action: none; border: 1px solid black;}
+        .topTools{width: 972px; height: 100px; border: 1px solid black; float: left;}
+        .topTools>ul>li{float: left; margin: 25px 7px 0;}
+        .topTools>ul>li:nth-child(1){width: 120px; height: 40px; color: aliceblue; overflow: hidden; border-radius: 10px;}
+        .topTools>ul>li:nth-child(1)>button{width: 40px; height: 20px; float: left; border: 0;}
+        .topTools>ul>li:nth-child(1)>button:nth-child(1){background-color: black;}
+        .topTools>ul>li:nth-child(1)>button:nth-child(2){background-color: red;}
+        .topTools>ul>li:nth-child(1)>button:nth-child(3){background-color: deepskyblue;}
+        .topTools>ul>li:nth-child(1)>button:nth-child(4){background-color: green;}
+        .topTools>ul>li:nth-child(1)>button:nth-child(5){background-color: yellow;}
+        .topTools>ul>li:nth-child(1)>button:nth-child(6){background-color: purple;}
+        .topTools>ul>li:not(:nth-child(1))>button{width: 80px; height: 40px; color: white; border: 0;}
+        .topTools>ul>li:not(:nth-child(1))>button.choosed{background-color: yellowgreen;}
+        .topTools>ul>li:not(:nth-child(1))>button.nochoosed{background-color: green;}
+        .topTools>ul>li:not(:nth-child(1))>button:active{background-color: teal;}
+
+        .rightTools{width: 100px; height: 800px; border: 1px solid black; float: left;}
+        .rightTools>ul>li{width: 100px; height: 40px; margin-top: 10px;}
+        .rightTools>ul>li>button{width: 80px; height: 40px; margin-left: 10px; border: 0; color: white;}
+        .rightTools>ul>li>button.choosed{background-color: yellowgreen;}
+        .rightTools>ul>li>button.nochoosed{background-color: green;}
+        .rightTools>ul>li>button:active{background-color: teal;}
+        .rightTools>ul>li>input{width: 80px; height: 40px;  margin-left: 10px; text-align: center; border: 2px solid green; outline: none;}
+        input#inputFlag{width: 120px; height: 30px; border: 2px solid green; outline: none; text-align: center; font-family: Arial; font-size: 20px; position: absolute;}
+        input#inputFlag.hidden{display: none;}
+        input#inputFlag.show{display: block;}
+    </style>
+</head>
+<body>
+    <div id="box">
+        <h1>画板</h1>
+        <div class="topTools">
+            <ul>
+                <li>
+                    <button id="colorBlack"></button>
+                    <button id="colorRed"></button>
+                    <button id="colorBlue"></button>
+                    <button id="colorGreen"></button>
+                    <button id="colorYellow"></button>
+                    <button id="colorPurple"></button>
+                </li>
+                <li><button id="rubber" class="nochoosed">橡皮檫</button></li>
+                <li><button id="cancle" class="nochoosed">撤销</button></li>
+                <li><button id="flag" class="nochoosed">标志</button></li>
+                <li><button id="rule" class="nochoosed">尺子</button></li>
+                <li><button id="protractor" class="nochoosed">量角器</button></li>
+                <li><button id="rotate" class="nochoosed">旋转</button></li>
+            </ul>
+        </div>
+        <div class="canvasTools">
+            <canvas id="myCanvas" width="870" height="800">您的浏览器版本太低，赶紧换一个吧</canvas>
+        </div>
+        <div class="rightTools">
+            <ul>
+                <li><button id="point" class="nochoosed">点</button></li>
+                <li><button id="segment" class="nochoosed">线段</button></li>
+                <li><button id="circular" class="nochoosed">圆</button></li>
+                <li><button id="fan" class="nochoosed">扇形</button></li>
+                <li><button id="radius" class="nochoosed">半径</button></li>
+                <li><button id="chord" class="nochoosed">弦</button></li>
+                <!-- <li><button id="tangent" class="nochoosed">切线</button></li> -->
+                <li><input id="value" type="text" placeholder="输入值"></li>
+            </ul>
+        </div>
+        <input type="text" id="inputFlag" class="hidden" placeholder="请输入字母">
+    </div>
+</body>
+</html>
