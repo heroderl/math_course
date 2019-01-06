@@ -138,6 +138,16 @@
     	var AddTestQuest = function(){
     		var result = {};
     		
+    		function test(){
+    			var phpid=UrlParm.parm("phpid");
+//  			console.log(phpid);
+				if( phpid == undefined )
+				{
+					alert("请先登录！");
+					window.location.href = "adminLogin.html";
+				}
+    		}
+    		
     		function addtest(){
     			var phpid = UrlParm.parm("phpid");
     			$.ajax({
@@ -189,12 +199,14 @@
     		result.ArrowLeft = ArrowLeft;
     		result.ArrowRight = ArrowRight;
     		result.addtest = addtest;
+    		result.test = test;
     		return result;
     	}
     	
     	
     	
     	var addTestQuest = new AddTestQuest();
+    	addTestQuest.test();
     	
     	$('.ui_input_btn03').on('click', function() {
 			addTestQuest.addtest();

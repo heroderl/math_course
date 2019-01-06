@@ -70,7 +70,13 @@
 				var that = this;
 				
 				//获取登陆后的cookie值
-				var phpid=UrlParm.parm("phpid");	
+				var phpid=UrlParm.parm("phpid");
+				if( phpid == undefined )
+				{
+					alert("请先登录！");
+					window.location.href = "adminLogin.html";
+				}
+//				console.log(phpid);
 				
 				$.ajax({
 					type: "post",

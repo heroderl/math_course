@@ -143,6 +143,11 @@
 			function showQuestion() {
 				var name=UrlParm.parm("name");
 				var phpid=UrlParm.parm("phpid");
+				if( phpid == undefined )
+				{
+					alert("请先登录！");
+					window.location.href = "adminLogin.html";
+				}
 				console.log(name);
 				console.log(phpid);
 		    	$.ajax({

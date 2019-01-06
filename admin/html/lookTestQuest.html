@@ -52,8 +52,11 @@
     			var result = {};
     			var name=UrlParm.parm("name");
     			var phpid = UrlParm.parm("phpid");
-    			console.log(name);
-    			console.log(phpid);
+				if( phpid == undefined )
+				{
+					alert("请先登录！");
+					window.location.href = "adminLogin.html";
+				}
 		    	$.ajax({
 		    		type:"post",
 		    		url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "LookQuestion/lookquestion/" ,
