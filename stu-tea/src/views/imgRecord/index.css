@@ -1,0 +1,25 @@
+article.content {
+    position: relative;
+    background-color: rgba(0, 151, 30, 0.2);
+    width: 100%;
+    padding: 24px 35px;
+    box-sizing: border-box;
+}
+.box_content {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    box-sizing: border-box;
+    border: 6px solid rgb(253, 101, 6);
+    border-radius: 30px;
+    overflow: hidden;
+}
+.box-scroll {
+    width: calc(100% + 17px);
+    width: -webkit-calc(100% + 17px);
+    width: -moz-calc(100% + 17px);
+    overflow: hidden;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

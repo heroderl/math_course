@@ -1,0 +1,275 @@
+article.content {
+    position: relative;
+    background-color: rgba(0, 151, 30, 0.2);
+    width: 100%;
+    padding: 24px 35px;
+    box-sizing: border-box;
+}
+.box_content {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    box-sizing: border-box;
+    border: 6px solid rgb(253, 101, 6);
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+/* 辅助工具 */
+article.assistPanel {
+    width: 493px;
+    height: 106px;
+    border-right: 2px solid #fd6506;
+    border-bottom: 2px solid #fd6506;
+    display: block;
+    float: left;
+}
+.top_tools_panel_left_color {
+    width: 93px;
+    height: 47px;
+    margin: 33.5px 0 0 39px;
+    border-radius: 10px;
+    display: block;
+    float: left;
+    overflow: hidden;
+}
+.top_tools_panel_left_color>ul {
+    overflow: hidden;
+}
+.top_tools_panel_left_color>ul>li {
+    width: 31px;
+    height: 23.5px;
+    float: left;
+}
+.top_tools_panel_left_color>ul>li>button {
+    width: 31px;
+    height: 23.5px;
+}
+#colorBlack{background-color: black;}
+#colorBlue{background-color: dodgerblue;}
+#colorGreen{background-color: limegreen;}
+#colorPurple{background-color: darkviolet;}
+#colorRed{background-color: red;}
+#colorYellow{background-color: yellow;}
+.top_tools_panel_left_tool {
+    display: block;
+    float: left;
+    width: 361px;
+    height: 106px;
+    line-height: 106px;
+}
+.top_tools_panel_left_tool>ul {
+    overflow: hidden;
+    display: block;
+    margin-top: 27.5px;
+}
+.top_tools_panel_left_tool>ul>li {
+    display: block;
+    width: 34.5px;
+    height: 45px;
+    padding: 3px;
+    margin: 0 9.8px;
+    float: left;
+}
+.top_tools_panel_left_tool>ul>li>button {
+    width: 34.5px;
+    height: 41px;
+    float: left;
+}
+#flag{height: 41px;  width:34.5px; background-size: 100%;-webkit-background-size: 100%; background-repeat: no-repeat;}
+#rubber{height: 41px;  width:34.5px; background-size: 100%;-webkit-background-size: 100%; background-repeat: no-repeat;}
+#rule{height: 41px; width:34.5px; background-size: 100%;-webkit-background-size: 100%; background-repeat: no-repeat;}
+#protractor{height: 41px;  width:28px; background-size: 100%;-webkit-background-size: 100%; background-repeat: no-repeat;}
+#rotate{height: 41px;  width:39px; background-size: 100%;-webkit-background-size: 100%; background-repeat: no-repeat;}
+#cancle{height: 41px;  width:34.5px; background-size: 100%;-webkit-background-size: 100%; background-repeat: no-repeat;}
+#flag.choosed{background-image: url(../../../static/image/ohuaban.png);}
+#rubber.choosed{background-image: url(../../../static/image/oxiangpi.png);}
+#rule.choosed{background-image: url(../../../static/image/ochizi.png);}
+#protractor.choosed{background-image: url(../../../static/image/oyuangui.png);}
+#rotate.choosed{background-image: url(../../../static/image/oxuanzhuan.png);}
+#flag.nochoosed{background-image: url(../../../static/image/huaban1.png);}
+#rubber.nochoosed{background-image: url(../../../static/image/xiangpi.png);}
+#rule.nochoosed{background-image: url(../../../static/image/chizi.png);}
+#protractor.nochoosed{background-image: url(../../../static/image/yuangui.png);}
+#rotate.nochoosed{background-image: url(../../../static/image/xuanzhuan.png);}
+#cancle.nochoosed{background-image: url(../../../static/image/cancle.png);}
+
+/* 试题内容 */
+article.questPanel {
+    height: 106px;
+    border-bottom: 2px solid #fd6506;
+    display: block;
+    float: left;
+}
+
+/* 画板工具 */
+article.canvasPanel {
+    display: block;
+    float: left;
+}
+
+/* 右边工具栏 */
+article.toolPanel {
+    width: 145px;
+    display: block;
+    float: left;
+    border-left: 2px solid #fd6506;
+    text-align: center;
+    overflow: hidden;
+}
+.toolScroll {
+    width: 162px;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.toolContent {
+    width: 145px;
+    overflow-x: hidden;
+}
+.tools_button {
+    width: 145px;
+    margin-top: 10px;
+    position: relative;
+}
+.tools_button>#interface_show {
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: #dedbdb;
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    border-radius: 10px;
+    color: black;
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 22px;
+}
+.tools_button>ul {
+    overflow: hidden;
+}
+.tools_button>ul>li {
+    float: left;
+    width: 145px;
+    height: 52.5px;
+    margin-bottom: 7px;
+}
+.tools_button>ul>li>button {
+    color: white;
+    font-size: 20px;
+}
+.tools_button>ul>li>button.choosed {
+    width: 123px;
+    height: 52.5px;
+    background-image: url(../../../static/image/tubiaoo.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+.tools_button>ul>li>button.nochoosed {
+    width: 123px;
+    height: 52.5px;
+    background-image: url(../../../static/image/tubiao.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+.toolContent>input {
+    width: 120.5px;
+    height: 40px;
+    border: 3px solid rgb(18, 158, 21);
+    border-radius: 15px;
+    outline: none;
+    color: black;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 400px;
+}
+.toolContent>input:active {
+    outline: none;
+}
+.toolContent>input::-webkit-input-placeholder {
+    color: black;
+    font-size: 20px;
+    text-align: center;
+}
+.toolContent>button.right_tools_panel_Preservation {
+    width: 115.5px;
+    height: 49.5px;
+    background-image: url(../../../static/image/baocun.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: white;
+    font-size: 20px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+/* 介绍信息 */
+aside.inforPanel {
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.inforMask {
+    width: 512px;
+    background-color: dimgray;
+    border-radius: 20px;
+    color: white;
+    padding: 15px 10px;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.inforMask>h1 {
+    font-size: 25px;
+    height: 25px;
+    line-height: 25px;
+    margin-bottom: 15px;
+}
+.inforMask>ul {
+    font-size: 20px;
+    line-height: 35px;
+    overflow: hidden;
+}
+.inforMask>ul>li {
+    float: left;
+    text-align: left;
+    text-indent: 2em;
+    letter-spacing: 3px;
+}
+.inforMask>button {
+    font-size: 20px;
+    color: white;
+    width: 123px;
+    height: 52.5px;
+    background-image: url(../../../static/image/tubiao.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin-top: 15px;
+    line-height: 52.5px;
+}
+/* 弹出文本框，输入点的字母标志 */
+#inputFlag {
+    background-color: white;
+    border: 2px solid green;
+    color: black;
+    font-size: 20px;
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#inputFlag.hidden {
+    display: none;
+}
+#inputFlag.show {
+    display: block;
+}
