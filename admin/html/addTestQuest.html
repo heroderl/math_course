@@ -140,7 +140,6 @@
     		
     		function test(){
     			var phpid=UrlParm.parm("phpid");
-//  			console.log(phpid);
 				if( phpid == undefined )
 				{
 					alert("请先登录！");
@@ -150,6 +149,21 @@
     		
     		function addtest(){
     			var phpid = UrlParm.parm("phpid");
+    			if($(".textarea_custom").val() == "")
+    			{
+    				alert("请填写试题编号！");
+    				return ;
+    			}
+    			if($(".q_content").val() == "")
+    			{
+    				alert("请填写试题内容！");
+    				return ;
+    			}
+    			if($("#q_board").val() == "")
+    			{
+    				alert("请填写画板！");
+    				return ;
+    			}
     			$.ajax({
 		    		type:"POST",
 		    		url:'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "AddQuestion/addquestion/"+"&"+"t="+Math.random(),
