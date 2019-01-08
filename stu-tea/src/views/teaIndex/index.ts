@@ -27,7 +27,7 @@ export default class TeaIndex extends Vue {
                     text: '新建画板'
                 },
                 {
-                    click: () => {},
+                    click: this.TQuesRecord,
                     src: require('../../../static/image/liebiao.png'),
                     text: '试题列表'
                 },
@@ -62,12 +62,17 @@ export default class TeaIndex extends Vue {
 
     // 跳转到画板页面
     goPaint (): void {
-        this.$router.push({ name: 'Paint' });
+        this.$router.push({ name: 'TPaint' });
+    }
+
+    // 跳转到试题列表页面
+    TQuesRecord (): void {
+        this.$router.push({ name: 'TQuesRecord' });
     }
 
     // 跳转到查看记录页面
     goImgRecord (): void {
-        this.$router.push({ name: 'ImgRecord' });
+        this.$router.push({ name: 'TImgRecord' });
     }
 
     mounted () {

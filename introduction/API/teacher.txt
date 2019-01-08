@@ -5,6 +5,7 @@ url:       math_course/admin/FindQuestion.php
 方法名: questiontime()
 参数：
            $_POST["q_time"] : 时间(年月日2018-12-02)
+	'2018-12-02'
 返回值:json格式的相同日期的所有试题数据
 
 
@@ -12,7 +13,7 @@ url:       math_course/admin/FindQuestion.php
 url:       math_course/admin/FindQuestion.php
 方法名: allquestion()
 参数：
-           无
+           无参
 返回值:json格式的所有试题数据
 
 

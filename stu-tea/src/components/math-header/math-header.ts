@@ -1,5 +1,4 @@
-import Vue from 'vue';
-import { Component, Watch } from 'vue-property-decorator'
+import { Vue, Component, Watch } from 'vue-property-decorator'
 
 /**
  * 父组件向此组件传递参数：title, btnName, isShowBtn

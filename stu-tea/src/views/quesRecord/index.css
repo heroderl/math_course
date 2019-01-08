@@ -1,0 +1,7 @@
+article.content {
+    position: relative;
+    background-color: rgba(0, 151, 30, 0.2);
+    width: 100%;
+    padding: 24px 35px;
+    box-sizing: border-box;
+}
