@@ -174,23 +174,32 @@
 			
 			function deletee(thiss){
 				var result = {};
-				var phpid=UrlParm.parm("phpid");
-				var i = thiss.target.parentNode.parentNode.parentNode.firstChild.getAttribute('data-qid');
-				$.ajax({
-					type: "post",
-					url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "ShowQuestion/deletequestion/" + i ,
-					dataType:'json',
-					data:{
-						"phpid" : phpid
-					},	
-					async:false,//改异步显示数据
-					success: function(d) {
-						alert("删除成功");
-					},
-					error : function(d) {
-						alert("删除失败");
-					}
-				});
+				if(confirm('确认删除该试题？'))
+				{
+					var phpid=UrlParm.parm("phpid");
+					var i = thiss.target.parentNode.parentNode.parentNode.firstChild.getAttribute('data-qid');
+					$.ajax({
+						type: "post",
+						url: 'http://' + urlConfig.host + ':' + urlConfig.post + urlConfig.com + "ShowQuestion/deletequestion/" + i ,
+						dataType:'json',
+						data:{
+							"phpid" : phpid
+						},	
+						async:false,//改异步显示数据
+						success: function(d) {
+							alert("删除成功");
+						},
+						error : function(d) {
+							alert("删除失败");
+						}
+					});
+				}
+				else
+				{
+					return ;
+				}
+				
+				
 				
 				result.deletee = deletee;
 				return result;
