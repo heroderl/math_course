@@ -1,0 +1,20 @@
+.math-list{ width: 100%; height: 100%; }
+
+/* -----查询试题----- */
+.math-list-time{ overflow: hidden; width: 100%; height: 50px; }
+img.dateImg{ width: 32px; height: 33px; float: left; margin: 0 0 0 74px; }
+.math-list-time_select{ float: left; margin: 0 0 0 50px; overflow: hidden; }
+.math-list-time_select>span{ float: left; margin-left: 5px; margin-right: 15px; color: #00971E; font-size: 17px; }
+.math-list-time_select>select{ float: left; background-color: transparent; border: 2px solid #00971E; border-radius: 10px; width: 70px; height: 32px; color: #00971E; outline: none; font-size: 20px; }
+.math-list-time_select>select>option{ border: 1px solid #00971E; background-color: rgba(0, 151, 30, 0.2); font-size: 20px;}
+
+/* -----试题列表----- */
+.math-list-body{ position: absolute; top: 75px; bottom: 25px; left: 35px; right: 35px; box-sizing: border-box; background-color: white; border: 6px solid #fd6506; border-radius: 30px; overflow-y:scroll;}
+.math-list-body>ul{width: 100%; display: inline-block;}
+.math-list-body>ul>li{ width: 100%; height: 90px; border-bottom:  2px solid #fd6506; overflow: hidden; float: left;}
+.math-list-body>ul>li div{width: 38px; height: 38px; float: left; margin: 26px 12px; background-image: url(../../../static/image/yuan.png); background-repeat: no-repeat; background-size: cover; -webkit-background-size: cover; line-height: 38px; text-align: center; color: white; font-size: 20px; }
+.math-list-body>ul>li p{ font-size: 20px; color: #00971E; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; margin: 0; height: 90px; line-height: 90px; position: absolute; left: 62px; right: 316px; text-align: left;}
+.math-list-body>ul>li span{ float: right; background-color: transparent; border: 2px solid #00971E; border-radius: 10px; width: 168px; height: 35px; float: right; margin: 27px 10px 0px 0px; font-size: 20px; text-align: center; line-height: 35px; color: #00971E; }
+.math-list-body>ul>li>button.noPush{ background-image: url(../../../static/image/tubiao.png); width: 107px; height: 46px; background-repeat: no-repeat; background-size: cover; -webkit-background-size: cover; float: right; margin: 21px 15px 0px 0px; font-size: 20px; color: white; }
+.math-list-body>ul>li>button.push{background-image: url(../../../static/image/tubiaoo.png); width: 107px; height: 46px; background-repeat: no-repeat; background-size: cover; -webkit-background-size: cover; float: right; margin: 21px 15px 0px 0px; font-size: 20px; color: white; }
+::-webkit-scrollbar{display: none;}
