@@ -15,37 +15,44 @@ export default new Router({
         {
             name: 'StuIndex',
             path: '/StuIndex',
-            component: StuIndex
+            component: StuIndex,
+            meta: false
         },
         {
             name: 'Paint',
             path: '/StuIndex/Paint',
-            component: Paint
+            component: Paint,
+            meta: false
         },
         {
             name: 'ImgRecord',
             path: '/StuIndex/ImgRecord',
-            component: ImgRecord
+            component: ImgRecord,
+            meta: false
         },
         {
             name: 'TeaIndex',
             path: '/TeaIndex',
-            component: TeaIndex
+            component: TeaIndex,
+            meta: false
         },
         {
             name: 'TPaint',
             path: '/TeaIndex/Paint',
-            component: Paint
+            component: Paint,
+            meta: false
         },
         {
             name: 'TQuesRecord',
             path: '/TeaIndex/QuesRecord',
-            component: QuesRecord
+            component: QuesRecord,
+            meta: false
         },
         {
             name: 'TImgRecord',
             path: '/TeaIndex/ImgRecord',
-            component: ImgRecord
+            component: ImgRecord,
+            meta: false
         }
     ]
 })

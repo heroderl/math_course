@@ -2,7 +2,7 @@
     <section>
         <math-header :isShowBtn="mathHeader.btnFlag" :title="mathHeader.headerName" :btnName="mathHeader.btnName"></math-header>
         <article class="content" ref="content">
-            <ques-list :date="date"></ques-list>
+            <ques-list :date="date" :list="list"></ques-list>
         </article>
     </section>
 </template>

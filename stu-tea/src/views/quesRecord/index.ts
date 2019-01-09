@@ -23,8 +23,7 @@ export default class QuesRecord extends Vue {
                 btnName: '返回'
             },
             date: Array(0),
-            questions: Array(0),
-            list: {},
+            list: Array(0),
             articleHeight: 0
         }
     }
@@ -113,19 +112,25 @@ export default class QuesRecord extends Vue {
             type: 'post',
             dataType: 'json',
             timeout: 10000,
-            success: (data: [{'q_NO': string, 'q_board': string, 'q_content': string, 'q_id': string, 'q_other': string, 'q_state': string, 'q_time': string}]) => {
-                this.$data.questions = data;
-
+            success: (data: {code: number, message: string, data: [{'q_NO': string, 'q_board': string, 'q_content': string, 'q_id': string, 'q_other': string, 'q_state': string, 'q_time': string | string[]}]}) => {
                 for (let item of data['data']) {
                     let reg = /(\d+)-(\d+)-(\d+)/;
-                    let arr = reg.exec(item['q_time']);
+                    let arr = reg.exec(item['q_time'] as string);
+
+                    item['q_time'] = [arr[1], arr[2], arr[3]];
                     that.pushDate(parseInt(arr[1], 10), parseInt(arr[2], 10), parseInt(arr[3], 10))
                 }
+
+                data['data'].sort(function (a, b): number {
+                    return parseInt(b['q_id'], 10) - parseInt(a['q_id'], 10);
+                });
+
+                this.$data.list = data['data'];
             },
             error: (xml, status, err) => {
             },
             complete: (xml, status) => {
-                if (status === 'timeout') {
+                if (status === 'timeout' || status === 'error') {
                     console.log('网络连接失败');
                 }
             }

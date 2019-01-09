@@ -23,12 +23,13 @@
 
         <article class="math-list-body">
             <ul>
-                <!-- <li v-for="(item, key, index) in list" :key="item.id">
-                    <div>{{index}}</div>
-                    <p>{{item.content}}</p>
-                    <button :class="item.state">推送</button>
-                    <span>{{item.time}}</span>
-                </li> -->
+                <li v-for="(item, key) in queryQuesOfDate()" :key="item['q_id']" :data-qid="item['q_id']">
+                    <div>{{key + 1}}</div>
+                    <p>{{item['q_content']}}</p>
+                    <button v-if="isPush(parseInt(item['q_state'], 10))" class="noPush" @click="remotePush($event)">推送</button>
+                    <button v-else class="push" @click="remotePush($event)">推送中</button>
+                    <span>{{item['q_time'][0]}}年{{item['q_time'][1]}}月{{item['q_time'][2]}}日</span>
+                </li>
             </ul>
         </article>
     </div>
