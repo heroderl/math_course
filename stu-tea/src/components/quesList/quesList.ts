@@ -1,4 +1,5 @@
 import { Vue, Component, Watch } from 'vue-property-decorator'
+import { EIdentity, Socket } from '../../assets/js/socket'
 
 /**
  * 父组件向此组件传递参数：date[{year, month[{month, day[]}]}], list['id', 'content', 'state', 'time]
@@ -8,6 +9,13 @@ import { Vue, Component, Watch } from 'vue-property-decorator'
     props: ['date', 'list']
 })
 export default class QuesList extends Vue {
+    private socket: Socket;
+
+    constructor () {
+        super();
+        this.socket = new Socket(EIdentity.teacher);
+    }
+
     data () {
         return {
             dDate: this.$props.date,
@@ -26,6 +34,12 @@ export default class QuesList extends Vue {
     @Watch('month')
     wMonth () {
         this.$data.day = -1;
+    }
+
+    @Watch('list')
+    wList () {
+        let param = this.getPushQeus();
+        // this.socket.send(param.status, param.qid);
     }
 
     // select的年
@@ -144,23 +158,49 @@ export default class QuesList extends Vue {
         }
     }
 
+    // 获取当前推送的试题
+    getPushQeus (): {status: boolean, qid: number} {
+        for (let item of this.$props.list) {
+            // tslint:disable-next-line:no-extra-boolean-cast
+            if (!!parseInt(item['q_state'], 10)) {
+                // 存在推送中
+                return { status: true, qid: parseInt(item['q_id'], 10) };
+            }
+        }
+
+        // 存在推送结束
+        return { status: false, qid: 0 };
+    }
+
     // ajax推送试题
     remotePush (e: Event): void {
         let qid = e.srcElement.parentElement.getAttribute('data-qid');
+        let flag = false;
 
         for (let item of this.$props.list) {
             // tslint:disable-next-line:no-extra-boolean-cast
             if (!!parseInt(item['q_state'], 10)) {
                 // 存在推送中
+                flag = true;
                 // 判断当前按钮
                 if (item['q_id'] === qid) {
-                    // 结束推送
-                    console.log('发送ajax请求结束推送');
+                    // 请求结束推送
+                    // console.log('发送ajax请求结束推送');
+                    this.socket.send(false, 0);
                 } else {
                     // 有试题在推送中，请结束推送
                     alert('有试题在推送中');
                 }
+
+                break;
             }
+        }
+
+        // 如果不存在试题推送
+        if (!flag) {
+            // 请求开始推送
+            // console.log('发送ajax请求开始推送');
+            this.socket.send(true, parseInt(qid, 10));
         }
     }
 }

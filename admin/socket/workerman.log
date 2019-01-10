@@ -1,0 +1,15 @@
+2019-01-09 22:59:57 pid:1 Worker process terminated with ERROR: E_RECOVERABLE_ERROR "Object of class stdClass could not be converted to string in F:\php\www\GitHub\math_course\admin\socket\test.php on line 79"
+2019-01-09 23:19:45 pid:1 Error: Call to a member function send() on null in F:\php\www\GitHub\math_course\admin\socket\test.php:95
+Stack trace:
+#0 [internal function]: WebSocket->{closure}(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#1 F:\php\www\GitHub\math_course\admin\socket\Workerman\Connection\TcpConnection.php(658): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection), '{"identity":"te...')
+#2 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #25)
+#3 F:\php\www\GitHub\math_course\admin\socket\Workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#4 F:\php\www\GitHub\math_course\admin\socket\Workerman\Worker.php(2321): Workerman\Events\Select->loop()
+#5 F:\php\www\GitHub\math_course\admin\socket\Workerman\Worker.php(1315): Workerman\Worker->run()
+#6 F:\php\www\GitHub\math_course\admin\socket\Workerman\Worker.php(1258): Workerman\Worker::forkWorkersForWindows()
+#7 F:\php\www\GitHub\math_course\admin\socket\Workerman\Worker.php(507): Workerman\Worker::forkWorkers()
+#8 F:\php\www\GitHub\math_course\admin\socket\test.php(22): Workerman\Worker::runAll()
+#9 F:\php\www\GitHub\math_course\admin\socket\test.php(116): WebSocket->start()
+#10 {main}
+2019-01-09 23:19:45 pid:1 Worker process terminated
